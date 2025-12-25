@@ -2,7 +2,7 @@ import Logo from '../../assets/svg/Logo.svg?react'
 
 const Footer = () => {
 	return (
-		<footer className='w-full mx-auto mb-10 max-w-106.25 min-[426px]:max-w-239.75 min-[960px]:max-w-300 px-2.5 min-[960px]:px-5 flex flex-col gap-5'>
+		<footer className='w-full mx-auto mt-5 mb-10 max-w-106.25 min-[426px]:max-w-239.75 min-[960px]:max-w-300 px-2.5 min-[960px]:px-5 flex flex-col gap-5'>
 			<div className='flex flex-col items-center gap-2 min-[426px]:flex-row min-[426px]:items-start  min-[426px]:justify-between'>
 				<div className='flex flex-col items-center gap-2.5 w-full min-[426px]:max-w-75 min-w-0 min-[426px]:items-start min-[1200px]:gap-5'>
 					<Logo />

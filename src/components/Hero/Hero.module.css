@@ -1,0 +1,32 @@
+.heroBg {
+	position: relative;
+
+	/* ВАЖНО: базовый фон, чтобы не просвечивало по углам */
+	background-color: #000; /* или #111 / или под твой фон, но не transparent */
+
+	background-image: url('../../assets/images/herobg.webp');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+@media (min-width: 959px) {
+	.heroBg {
+		border-radius: 40px;
+	}
+}
+
+.heroBg::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+
+	background: rgba(0, 0, 0, 0.35);
+	pointer-events: none;
+
+	/* КРИТИЧНО: иначе оверлей квадратный, и по углам будет “просвет/полоса” */
+	border-radius: inherit;
+}
