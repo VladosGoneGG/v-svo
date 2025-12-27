@@ -3,6 +3,7 @@ import Compensations from '../components/Compensations/Compensations'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
+import Vacansies from '../components/Vacansies/Vacansies'
 
 const Home = () => {
 	return (
@@ -13,6 +14,7 @@ const Home = () => {
 				<Hero />
 				<Compensations />
 				<Benifits />
+				<Vacansies />
 			</main>
 
 			<Footer />

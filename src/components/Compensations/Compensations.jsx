@@ -1,3 +1,81 @@
+const ITEMS = [
+	{
+		title: 'Единовременная выплата',
+		amount: 'до 3 000 000 руб.',
+		desc: 'по региональным и федеральным программам',
+		h: 'h-[96px]',
+		minH: 'max-[425px]:min-h-[96px]',
+		col: 'md:col-span-2 lg:col-span-1',
+	},
+	{
+		title: 'Ежемесячная оплата труда',
+		amount: 'от 210 000 руб.',
+		desc: 'с учетом всех надбавок и премий за службу в зоне СВО',
+		h: 'h-[115px]',
+		minH: 'max-[425px]:min-h-[115px]',
+		col: 'md:col-span-2 lg:col-span-1',
+	},
+	{
+		title: 'Выплата при ранении',
+		amount: 'до 3 000 000 руб.',
+		desc: 'по степени тяжести',
+		h: 'h-[96px]',
+		minH: 'max-[425px]:min-h-[96px]',
+		col: 'md:col-span-2 lg:col-span-1',
+	},
+	{
+		title: 'Страховая выплата семье военнослужащего',
+		amount: '12 400 000 руб.',
+		desc: 'по федеральному законодательству',
+		h: 'h-[96px]',
+		minH: 'max-[425px]:min-h-[96px]',
+		col: 'md:col-span-2 lg:col-span-1',
+	},
+	{
+		title: 'Списание долгов и кредитов',
+		amount: 'до 10 000 000 руб.',
+		desc: 'для участников боевых действий',
+		h: 'h-[96px]',
+		minH: 'max-[425px]:min-h-[96px]',
+		col: 'md:col-span-2 lg:col-span-1',
+	},
+	{
+		title: 'Выплата за уничтожение техники противника',
+		amount: 'до 500 000 руб.',
+		desc: 'в зависимости от типа цели',
+		h: 'h-[96px]',
+		minH: 'max-[425px]:min-h-[96px]',
+		col: 'md:col-span-2 lg:col-span-1',
+	},
+	{
+		title: 'Доплата за продижение',
+		amount: '50 000 руб.',
+		desc: 'за каждый километр',
+		h: 'h-[96px]',
+		minH: 'max-[425px]:min-h-[96px]',
+		col: 'md:col-span-3 lg:col-span-1',
+	},
+	{
+		title: 'Выплата за захват техники',
+		amount: '1 000 000 руб.',
+		desc: 'по установленным нормативам Министерства Обороны',
+		h: 'h-[115px]',
+		minH: 'max-[425px]:min-h-[115px]',
+		col: 'md:col-span-3 lg:col-span-1',
+	},
+]
+
+const liBase =
+	'flex items-center shadow-item max-[425px]:items-start ' +
+	'max-[425px]:h-auto ' +
+	'md:h-auto md:min-h-0 md:items-start ' +
+	'w-full rounded-[20px] bg-[#1d1e21]'
+
+const innerBase =
+	'flex flex-col justify-center items-start w-full ' +
+	'h-[66px] max-[425px]:h-auto md:h-auto ' +
+	'px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
+
 const Compensations = () => {
 	return (
 		<section className='relative flex flex-col items-center pt-5 pb-5 lg:pb-[30px] xl:pb-[40px]'>
@@ -18,197 +96,26 @@ const Compensations = () => {
 						className='w-full flex flex-col gap-2.5
 						md:grid md:grid-cols-6 md:gap-2.5 md:min-h-[428px] lg:grid-cols-2 lg:min-h-[550px]   min-[1199]:min-h-[652px] '
 					>
-						{/* 1 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[96px] max-[425px]:h-auto max-[425px]:min-h-[96px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-2 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col  justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
+						{ITEMS.map(item => (
+							<li
+								key={item.title}
+								className={`${liBase} ${item.h} ${item.minH} ${item.col}`}
 							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Единовременная выплата
-								</p>
-								<p className='font-inter lg:text-[24px] xl:text-[30px] font-semibold text-contrast'>
-									до 3 000 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									по региональным и федеральным программам
-								</p>
-							</div>
-						</li>
+								<div className={innerBase}>
+									<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
+										{item.title}
+									</p>
 
-						{/* 2 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[115px] max-[425px]:h-auto max-[425px]:min-h-[115px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-2 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Ежемесячная оплата труда
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									от 210 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									с учетом всех надбавок и премий за службу в зоне СВО
-								</p>
-							</div>
-						</li>
+									<p className='font-inter lg:text-[24px] xl:text-[30px] font-semibold text-contrast'>
+										{item.amount}
+									</p>
 
-						{/* 3 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[96px] max-[425px]:h-auto max-[425px]:min-h-[96px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-2 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Выплата при ранении
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									до 3 000 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									по степени тяжести
-								</p>
-							</div>
-						</li>
-
-						{/* 4 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[96px] max-[425px]:h-auto max-[425px]:min-h-[96px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-2 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Страховая выплата семье военнослужащего
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									12 400 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									по федеральному законодательству
-								</p>
-							</div>
-						</li>
-
-						{/* 5 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[96px] max-[425px]:h-auto max-[425px]:min-h-[96px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-2 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Списание долгов и кредитов
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									до 10 000 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									для участников боевых действий
-								</p>
-							</div>
-						</li>
-
-						{/* 6 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[96px] max-[425px]:h-auto max-[425px]:min-h-[96px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-2 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Выплата за уничтожение техники противника
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									до 500 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									в зависимости от типа цели
-								</p>
-							</div>
-						</li>
-
-						{/* 7 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[96px] max-[425px]:h-auto max-[425px]:min-h-[96px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-3 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Доплата за продижение
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									50 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									за каждый километр
-								</p>
-							</div>
-						</li>
-
-						{/* 8 */}
-						<li
-							className='flex items-center shadow-item max-[425px]:items-start
-							h-[115px] max-[425px]:h-auto max-[425px]:min-h-[115px]
-							md:h-auto md:min-h-0 md:items-start
-							w-full rounded-[20px] bg-[#1d1e21] md:col-span-3 lg:col-span-1'
-						>
-							<div
-								className='flex flex-col justify-center items-start w-full
-								h-[66px] max-[425px]:h-auto md:h-auto
-								px-[25px] py-[15px] lg:px-[30px] lg:pt-[20px] lg:pb-[28px] xl:px-[40px] xl:py-[30px]'
-							>
-								<p className='font-inter font-normal text-[14px] lg:text-[21px] text-white'>
-									Выплата за захват техники
-								</p>
-								<p className='font-inter font-semibold lg:text-[24px] xl:text-[30px] text-contrast'>
-									1 000 000 руб.
-								</p>
-								<p className='font-golos font-medium text-[14px] text-[#797c85]'>
-									по установленным нормативам Министерства Обороны
-								</p>
-							</div>
-						</li>
+									<p className='font-golos font-medium text-[14px] text-[#797c85]'>
+										{item.desc}
+									</p>
+								</div>
+							</li>
+						))}
 					</ul>
 				</div>
 
