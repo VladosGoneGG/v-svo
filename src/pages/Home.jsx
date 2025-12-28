@@ -1,8 +1,10 @@
 import Benifits from '../components/Benifits/Benifits'
 import Compensations from '../components/Compensations/Compensations'
+import Equipment from '../components/Equipment/Equipment'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
+import Requirements from '../components/Requirements/Requirements'
 import Vacansies from '../components/Vacansies/Vacansies'
 
 const Home = () => {
@@ -15,6 +17,8 @@ const Home = () => {
 				<Compensations />
 				<Benifits />
 				<Vacansies />
+				<Equipment />
+				<Requirements />
 			</main>
 
 			<Footer />
