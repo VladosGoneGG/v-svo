@@ -62,7 +62,8 @@ const Hero = () => {
 						<span className={styles.title}>Оформление контракта на СВО</span>
 						<br />
 						<span className={styles.subtitle}>
-							официальное сопровождение и выплаты до 7 000 000{' '}
+							официальное сопровождение и <br className='min-[768px]:hidden' />{' '}
+							выплаты до 7 000 000{' '}
 							<br className='hidden min-[768px]:block min-[1199px]:hidden' />{' '}
 							руб.
 						</span>

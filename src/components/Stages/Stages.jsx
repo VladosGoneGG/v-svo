@@ -17,8 +17,8 @@ const Stages = () => {
 				<div className='w-full flex justify-center items-center mt-5 lg:mt-7.5'>
 					<ul className='flex flex-col md:grid md:grid-cols-2 md:gap-x-5 md:gap-y-2.5 lg:grid-cols-3 font-golos'>
 						{/* 1 */}
-						<li className='flex p-2.5 lg:p-5 lg:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
-							<div className='flex w-full max-w-[300px] min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+						<li className='flex p-2.5 md:p-5 md:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
+							<div className='flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] font-semibold'>Оставьте заявку</p>
 								<p className='text-[14px] font-medium'>
 									Оставьте заявку заранее, чтобы мы проверили вашу годность,
@@ -33,8 +33,8 @@ const Stages = () => {
 						</li>
 
 						{/* 2 */}
-						<li className='flex p-2.5 lg:p-5 lg:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
-							<div className='flex w-full max-w-[300px] min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+						<li className='flex p-2.5 md:p-5 md:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
+							<div className='flex w-full  min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] font-semibold'>Консультация</p>
 								<p className='text-[14px] font-medium'>
 									Куратор ответит на ваши вопросы, разъяснит условия службы,
@@ -50,8 +50,8 @@ const Stages = () => {
 						</li>
 
 						{/* 3 */}
-						<li className='flex p-2.5 lg:p-5 lg:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:col-start-1 lg:row-start-2'>
-							<div className='flex w-full max-w-[300px] min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+						<li className='flex p-2.5 md:p-5 md:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:col-start-1 lg:row-start-2'>
+							<div className='flex w-full  min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] font-semibold'>Подготовка и выезд</p>
 								<p className='text-[14px] font-medium'>
 									Мы согласуем удобную дату прибытия, проконсультируем по
@@ -66,8 +66,8 @@ const Stages = () => {
 						</li>
 
 						{/* 4 */}
-						<li className='flex p-2.5 lg:p-5 lg:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:col-start-2 lg:row-start-2'>
-							<div className='flex w-full max-w-[300px] min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+						<li className='flex p-2.5 md:p-5 md:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:col-start-2 lg:row-start-2'>
+							<div className='flex w-full  min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] font-semibold'>
 									Оформление и подписание контракта
 								</p>
@@ -86,7 +86,7 @@ const Stages = () => {
 						<li className='hidden lg:block lg:col-start-3 lg:row-start-1 lg:row-span-2'>
 							<div className='flex flex-col gap-2.5 h-full'>
 								{/* 5 */}
-								<div className='flex p-2.5 lg:p-5 lg:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:min-h-[312px]'>
+								<div className='flex p-2.5 md:p-5 md:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:min-h-[312px]'>
 									<div className='flex w-full flex-col gap-2.5'>
 										<p className='text-[20px] font-semibold'>Начало службы</p>
 										<p className='text-[14px] font-medium'>
@@ -102,7 +102,7 @@ const Stages = () => {
 								</div>
 
 								{/* 6 */}
-								<div className='flex p-2.5 lg:p-5 lg:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
+								<div className='flex p-2.5 md:p-5 md:pl-7.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
 									<div className='flex w-full flex-col gap-2.5'>
 										<p className='text-[20px] font-semibold'>
 											Мы сопровождаем кандидата от первого обращения до начала
@@ -118,7 +118,7 @@ const Stages = () => {
 						</li>
 
 						{/* 5 и 6 для md / sm */}
-						<li className='flex p-2.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:hidden'>
+						<li className='flex p-2.5 md:p-5 md:pl-7.5 w-full  gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:hidden'>
 							<div className='flex gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
 								<div className='flex w-full flex-col gap-2.5'>
 									<p className='text-[20px] font-semibold'>Начало службы</p>
@@ -134,8 +134,8 @@ const Stages = () => {
 								</div>
 							</div>
 						</li>
-						<li className='flex p-2.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:hidden'>
-							<div className='flex gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
+						<li className='flex w-full md:p-5 md:pl-7.5  p-2.5 gap-2.5 md:bg-[#ebebeb] rounded-[20px] lg:hidden'>
+							<div className='flex  gap-2.5 md:bg-[#ebebeb] rounded-[20px]'>
 								<div className='flex w-full flex-col gap-2.5'>
 									<p className='text-[20px] font-semibold'>
 										Мы сопровождаем кандидата от первого обращения до начала
