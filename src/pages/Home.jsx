@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Requirements from '../components/Requirements/Requirements'
+import Stages from '../components/Stages/Stages'
 import Vacansies from '../components/Vacansies/Vacansies'
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
 				<Vacansies />
 				<Equipment />
 				<Requirements />
+				<Stages />
 			</main>
 
 			<Footer />

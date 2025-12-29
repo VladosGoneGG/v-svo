@@ -51,7 +51,7 @@ const Requirements = () => {
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Возраст
 								</p>
-								<p className='font-inter font-normal text-[14px] text-[#222] leading-5'>
+								<p className='font-golos font-medium text-[14px] text-[#222] leading-5'>
 									От 18 до 63 лет включительно. <br /> Образование — не ниже 9
 									класса. <br />
 									Преимущество имеют кандидаты с опытом службы или профильной
@@ -72,7 +72,7 @@ const Requirements = () => {
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Гражданство
 								</p>
-								<p className='font-inter font-normal text-[14px] text-[#222] leading-5'>
+								<p className='font-golos  font-medium text-[14px] text-[#222] leading-5'>
 									Граждане Российской Федерации, а также иностранные граждане,{' '}
 									<br />
 									имеющие необходимые документы
@@ -92,7 +92,7 @@ const Requirements = () => {
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Отсутствие судимости по статьям
 								</p>
-								<p className='font-inter font-normal text-[14px] text-[#222] leading-5'>
+								<p className='font-golos  font-medium text-[14px] text-[#222] leading-5'>
 									Кандидат не должен иметь непогашенной судимости по тяжким и{' '}
 									<br />
 									особо тяжким статьям. <br /> Проверка проводится официально по
@@ -113,7 +113,7 @@ const Requirements = () => {
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Категория здоровья
 								</p>
-								<p className='font-inter font-normal text-[14px] text-[#222] leading-5'>
+								<p className='font-golos  font-medium text-[14px] text-[#222] leading-5'>
 									Категория годности A, Б или В по итогам военно-врачебной{' '}
 									<br />
 									комиссии. <br /> Отсутствие противопоказаний, препятствующих
