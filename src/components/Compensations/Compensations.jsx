@@ -120,7 +120,7 @@ const Compensations = () => {
 				</div>
 
 				<div className='w-full flex justify-center items-center max-w-[405px] max-[766px]:max-w-none max-[425px]:h-auto md:max-w-none'>
-					<h3 className='w-full max-w-[365px] px-5 max-[766px]:max-w-none font-inter font-semibold text-[18px] md:text-[22px] lg:text-[24px] xl:text-[30px] text-contrast md:max-w-none'>
+					<h3 className='w-full max-w-[365px] px-5 max-[766px]:max-w-none font-inter font-semibold text-[18px] md:text-[22px] lg:text-[24px] xl:text-[30px] text-black md:max-w-none'>
 						Все выплаты - официальные. Помогаем разобраться в условиях и
 						получить положенные суммы
 					</h3>

@@ -3,7 +3,7 @@ import Tg from '../../assets/svg/telegram.svg?react'
 const Header = () => {
 	return (
 		<header className=' max-w-106.25 h-19  min-[426px]:max-w-239.75 min-[960px]:max-w-300'>
-			<div className='flex items-center justify-between p-2.5 min-[960px]:p-5'>
+			<div className='flex items-center justify-between p-2.5  min-[960px]:p-5'>
 				<a href='/'>
 					<Logo />
 				</a>
@@ -15,11 +15,11 @@ const Header = () => {
 					<li>Специализации</li>
 					<li>Блог</li>
 				</ul>
-				<div className='flex items-center'>
+				<div className='flex xl:gap-[50px] items-center'>
 					<div className='hidden min-[426px]:flex items-center gap-2.5 mr-3.75 min-[960px]:mr-0 min-[1200px]:mr-3.75'>
 						<a
 							href='tel:+79998887766'
-							className='font-golos font-medium text-[14px]'
+							className='font-golos font-medium text-[14px] '
 						>
 							+7(999)8887766
 						</a>

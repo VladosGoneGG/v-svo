@@ -60,7 +60,7 @@ const Benifits = () => {
 		<section className='flex flex-col items-center mb-5 lg:mb-[30px] xl:mb-[40px] pt-5 '>
 			<div className='flex flex-col gap-5 w-full px-2.5  min-[1199px]:px-[20px]'>
 				<div className='w-full max-w-[405px] max-[766px]:max-w-none  md:max-w-none'>
-					<h2 className='w-full max-w-[365px] max-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] px-5 lg:text-[30px] xl:text-[40px]  md:max-w-none'>
+					<h2 className='w-full text-contrast max-w-[365px] max-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] px-5 lg:text-[30px] xl:text-[40px]  md:max-w-none'>
 						Льготы и гарантии участникам СВО от государства
 					</h2>
 				</div>

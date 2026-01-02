@@ -6,12 +6,12 @@ import HeroIconFour from '../../assets/svg/hi-4.svg?react'
 const Heroicons = () => {
 	return (
 		<div
-			className='w-full mx-auto px-2 mb-2
+			className='w-full mx-auto px-2 pb-2
 			max-w-[505px] md:max-w-none
 			h-auto min-[959px]:min-h-[75px]'
 		>
 			<ul
-				className='font-golos font-medium text-black max-[330px]:text-[12px] text-[14px]
+				className='font-golos font-medium text-black max-[330px]:text-[12px] text-[14px] pb-2.5
 				grid grid-cols-2 gap-5
 				md:grid-cols-4 md:gap-2'
 			>

@@ -1,44 +1,55 @@
+import Gerb from '../../assets/images/gerb.png'
+
 const Requirements = () => {
 	return (
-		<section className='flex flex-col justify-center items-start mb-5 lg:mb-[30px] xl:mb-[40px] pt-5 '>
-			<div className='flex flex-col justify-center items-start sm:items-center  px-2.5 lg:px-5 md:flex-row w-full   md:gap-10'>
-				<div className='flex w-full md:min-h-[634px]  flex-col justify-start   gap-5 md:justify-between lg:max-w-[405px] xl:max-w-[548px] '>
-					<h2 className='w-full  font-golos font-semibold text-[20px] md:text-[24px] md:max-w-[350px] lg:text-[30px] xl:text-[40px] xl:max-w-[508px]  '>
+		<section className='relative flex flex-col justify-center items-start pb-5 lg:pb-[30px] xl:pb-[40px] pt-5'>
+			{/* БЕЛЫЙ ФОН НА ВСЮ ШИРИНУ ЭКРАНА */}
+			<div className='absolute inset-0 left-1/2 -translate-x-1/2 w-screen bg-white -z-10' />
+
+			<div className='flex flex-col justify-center items-start sm:items-center px-2.5 lg:px-5 md:flex-row w-full md:gap-10 '>
+				{/* ЛЕВАЯ КОЛОНКА */}
+				<div className='flex w-full md:max-w-[310px] md:min-h-[634px] flex-col justify-start gap-5 md:justify-between min-[960px]:justify-evenly lg:max-w-[405px] xl:max-w-[548px] '>
+					<h2 className='w-full font-golos text-contrast font-semibold text-[20px] md:text-[30px] md:max-w-[350px] lg:text-[30px] xl:text-[40px] xl:max-w-[508px]'>
 						Требования и условия для службы по контракту
 					</h2>
-					<p className='w-full  font-golos font-normal text-[14px] md:text-[16px] md:max-w-[350px] lg:text-[21px] xl:max-w-[508px] '>
+
+					<p className='w-full font-golos font-normal text-[14px] md:text-[21px] md:max-w-[350px] lg:text-[21px] xl:max-w-[508px]'>
 						Мы заранее проверим вашу годность, условия ВВК и подскажем, какие
 						документы нужны для допуска к контракту. Консультация бесплатная
 					</p>
-					<div className='w-full   flex flex-col gap-5 '>
-						<div className='flex  flex-row gap-4.5 items-start xl:gap-0 xl:justify-end '>
-							<div className='flex w-full flex-col  gap-2.5 max-w-[200px]  xl:max-w-[350px]'>
-								<p className='font-golos font-semibold text-[22px] '>
-									Цукан Артем
-								</p>
-								<p className='w-[200px] xl:w-full font-golos font-normal text-[16px]'>
-									Оставьте заявку для консультации о{' '}
-									<br className='hidden xl:block' /> вашей годности к
+
+					<div className='w-full  flex flex-col gap-5 md:items-end'>
+						<div className='flex w-full flex-row  lg:min-h-[133px] justify-between items-start  xl:justify-end bg-[#ebebeb] rounded-t-[10px] rounded-bl-[10px] xl:max-w-[470px] xl:min-h-[115px]'>
+							<div className='flex w-full  flex-col py-2.5 pl-[15px] mb-2.5 pr-2.5 gap-2.5'>
+								<p className='font-golos font-semibold text-[22px]'>Артем</p>
+								<p className='font-golos font-normal text-[16px]'>
+									Оставьте заявку для консультации о вашей годности к
 									контрактной службе
 								</p>
 							</div>
+
 							<div
-								className='w-[95px] h-[95px] mt-1.5								
-								bg-white rounded-[10px]
-								flex items-center justify-center
-							'
-								aria-label='Фото Цукан Артем'
+								className='w-[95px] h-[95px] mt-2.5 mr-2.5 bg-white rounded-[10px] flex items-center justify-center shrink-0'
+								aria-label='Герб'
 							>
-								{/* img сюда */}
+								{/* фиксируем размер самого SVG, чтобы он не “гулял” */}
+
+								<img src={Gerb} alt='Герб' />
+								{/* если хочешь, чтобы он занимал весь квадрат 95x95:
+                    <Gerb className='w-full h-full p-2.5' />
+                */}
 							</div>
 						</div>
-						<button className='w-full sm:max-w-[310px] h-[62px] flex items-center justify-center px-7.5 bg-contrast text-white shadow-btn rounded-[10px] font-inter font-semibold text-[18px] cursor-pointer xl:ml-auto'>
+
+						<button className='w-full md:max-w-[350px] xl:max-w-[310px] h-[62px] flex items-center justify-center px-7.5 bg-contrast text-white shadow-btn rounded-[15px] font-inter font-semibold text-[18px] cursor-pointer xl:ml-auto'>
 							Задать вопрос
 						</button>
 					</div>
 				</div>
-				<div className='flex w-full md:min-h-[634px]  mt-5 md:mt-0 '>
-					<div className='flex  flex-col gap-7 md:justify-between'>
+
+				{/* ПРАВАЯ КОЛОНКА */}
+				<div className='flex w-full md:min-h-[634px] mt-5 md:mt-0'>
+					<div className='flex flex-col gap-7 justify-between '>
 						{/* 01 */}
 						<div className='flex items-start gap-4'>
 							<div className='w-[44px] h-[44px] rounded-full bg-[#6f7176] flex items-center justify-center shrink-0'>
@@ -46,14 +57,13 @@ const Requirements = () => {
 									01
 								</span>
 							</div>
-
 							<div className='flex w-full max-w-[320px] sm:max-w-[500px] lg:max-w-[615px] flex-col gap-2.5'>
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Возраст
 								</p>
 								<p className='font-golos font-medium text-[14px] text-[#222] leading-5'>
-									От 18 до 63 лет включительно. <br /> Образование — не ниже 9
-									класса. <br />
+									От 18 до 63 лет включительно. <br />
+									Образование — не ниже 9 класса. <br />
 									Преимущество имеют кандидаты с опытом службы или профильной
 									подготовкой
 								</p>
@@ -67,13 +77,12 @@ const Requirements = () => {
 									02
 								</span>
 							</div>
-
 							<div className='flex w-full max-w-[320px] sm:max-w-[500px] md:max-w-none flex-col gap-2.5'>
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Гражданство
 								</p>
-								<p className='font-golos  font-medium text-[14px] text-[#222] leading-5'>
-									Граждане Российской Федерации, а также иностранные граждане,{' '}
+								<p className='font-golos font-medium text-[14px] text-[#222] leading-5'>
+									Граждане Российской Федерации, а также иностранные граждане,
 									<br />
 									имеющие необходимые документы
 								</p>
@@ -87,16 +96,15 @@ const Requirements = () => {
 									03
 								</span>
 							</div>
-
 							<div className='flex w-full max-w-[320px] sm:max-w-[500px] md:max-w-none flex-col gap-2.5'>
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Отсутствие судимости по статьям
 								</p>
-								<p className='font-golos  font-medium text-[14px] text-[#222] leading-5'>
-									Кандидат не должен иметь непогашенной судимости по тяжким и{' '}
+								<p className='font-golos font-medium text-[14px] text-[#222] leading-5'>
+									Кандидат не должен иметь непогашенной судимости по тяжким и
 									<br />
-									особо тяжким статьям. <br /> Проверка проводится официально по
-									базам МВД
+									особо тяжким статьям. <br />
+									Проверка проводится официально по базам МВД
 								</p>
 							</div>
 						</div>
@@ -108,16 +116,15 @@ const Requirements = () => {
 									04
 								</span>
 							</div>
-
 							<div className='flex w-full max-w-[320px] sm:max-w-[500px] md:max-w-none flex-col gap-2.5'>
 								<p className='font-golos font-semibold text-[20px] text-contrast'>
 									Категория здоровья
 								</p>
-								<p className='font-golos  font-medium text-[14px] text-[#222] leading-5'>
-									Категория годности A, Б или В по итогам военно-врачебной{' '}
+								<p className='font-golos font-medium text-[14px] text-[#222] leading-5'>
+									Категория годности A, Б или В по итогам военно-врачебной
 									<br />
-									комиссии. <br /> Отсутствие противопоказаний, препятствующих
-									службе
+									комиссии. <br />
+									Отсутствие противопоказаний, препятствующих службе
 								</p>
 							</div>
 						</div>

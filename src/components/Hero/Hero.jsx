@@ -44,7 +44,7 @@ const styles = {
 	// ✅ кнопка: убрал зависимость от "ml" (она и давала ощущение, что кнопка не там)
 	btn:
 		'w-full max-w-[280px] mt-6 h-[37px] min-[415px]:max-w-[350px] min-[425px]:max-w-[365px] ' +
-		'ml-2 md:ml-7 max-[360px]:ml-1 cursor-pointer rounded-[10px] shadow-btn text-[14px] ' +
+		'ml-2 md:ml-7 max-[360px]:ml-1 cursor-pointer rounded-[15px] shadow-btn text-[14px] ' +
 		'max-[360px]:text-[12px] bg-[#D14E15] min-[959px]:max-w-[450px] ' +
 		'min-[525px]:h-[62px] min-[525px]:mt-0 min-[525px]:text-[18px] min-[525px]:mt-10 ' +
 		'min-[800px]:mt-[20px] ' +
