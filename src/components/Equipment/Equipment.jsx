@@ -5,7 +5,7 @@ const Equipment = () => {
 		<section className='relative pb-5 lg:pb-[30px] xl:pb-[40px] pt-5'>
 			<div className='absolute inset-0 -left-[50vw] left-1/2 -translate-x-1/2 w-screen -z-10' />
 
-			<div className='w-full  px-5 min-[1199px]:px-[20px]'>
+			<div className='w-full  px-2.5 min-[1199px]:px-[20px]'>
 				<div
 					className='
             flex flex-col md:flex-row

@@ -1,92 +1,74 @@
 import Heroicons from '../Heroicons/Heroicons'
 import stylesCss from './Hero.module.css'
 
-const styles = {
-	wrap:
-		'relative mx-auto w-full max-w-106.25 ' +
-		'min-h-[400px] ' +
-		'min-[768px]:h-[clamp(435px,40vw,602px)] ' +
-		'min-[426px]:max-w-234.75 ' +
-		'min-[959px]:max-w-289.75 ' +
-		'min-[1199px]:max-w-300 min-[1199px]:h-[600px]',
-
-	// ✅ ключевой фикс: убрал mt-10/mt-7 и сделал стабильный padding сверху/снизу
-	content:
-		'relative max-w-[400px] max-[325px]:min-h-[380px]  max-[325px]:max-w-[290px] min-[430px]:max-w-[500px] md:max-w-[550px] lg:max-w-[640px] ' +
-		'flex flex-col justify-center min-[400px]:justify-between font-inter text-white ' +
-		'px-0 pl-1 min-[959px]:pl-2.5 min-[1199px]:pl-8 ' +
-		'pt-[60px] min-[425px]:pt-[50px] pb-[10px] min-[525px]:pt-[50px] ' + // ← вместо mt прыжков
-		'min-[768px]:pt-[36px] min-[768px]:pb-[24px] ' +
-		'min-[959px]:pt-[28px] min-[959px]:pb-[24px] ' +
-		'min-[1199px]:pt-[36px] min-[1199px]:pb-[28px] ' +
-		'min-h-[340px] min-[360px]:min-h-[390px] ' +
-		'min-[768px]:min-h-[435px] ' +
-		'min-[1199px]:min-h-[500px]',
-
-	// ✅ заголовок: оставил твои отступы, но чуть стабилизировал
-	h1:
-		'font-golos ml-2 max-[360px]:ml-1 min-[768px]:ml-7 ' +
-		'min-[959px]:mt-0 min-[1199px]:w-[570px]', // ← убрал лишний mt на 959
-
-	title:
-		'font-medium text-[24px] min-[768px]:text-[28px] min-[1024px]:text-[35px] min-[1199px]:text-[40px]',
-	subtitle:
-		'font-normal text-[16px] min-[768px]:text-[16px] min-[1199px]:text-[35px]',
-
-	// ✅ list: оставил твой ритм, но убрал лишние смещения на 959
-	list:
-		'font-normal font-golos text-[12px] min-[425px]:text-[14px] mt-5 mr-0.5 gap-3 ' +
-		'pl-1 md:pl-7 min-[360px]:pl-2.5 flex flex-col w-full max-w-[310px] ' +
-		'min-[425px]:max-w-[590px] ' +
-		'min-[959px]:max-w-[620px] min-[959px]:text-[16px] ' +
-		'min-[1199px]:text-[21px] min-[1199px]:gap-4 min-[1199px]:mt-1.5',
-
-	// ✅ кнопка: убрал зависимость от "ml" (она и давала ощущение, что кнопка не там)
-	btn:
-		'w-full max-w-[280px] mt-6 h-[37px] min-[415px]:max-w-[350px] min-[425px]:max-w-[365px] ' +
-		'ml-2 md:ml-7 max-[360px]:ml-1 cursor-pointer rounded-[15px] shadow-btn text-[14px] ' +
-		'max-[360px]:text-[12px] bg-[#D14E15] min-[959px]:max-w-[450px] ' +
-		'min-[525px]:h-[62px] min-[525px]:mt-0 min-[525px]:text-[18px] min-[525px]:mt-10 ' +
-		'min-[800px]:mt-[20px] ' +
-		'min-[768px]:h-[62px] min-[768px]:text-[18px] ' +
-		'min-[1199px]:h-[62px] min-[1199px]:max-w-[450px]',
-}
-
 const Hero = () => {
 	return (
-		<section className='mt-4 px-[10px] min-[1199px]:px-[20px]'>
-			{/* ✅ heroBg только тут, один раз */}
-			<div className={`${styles.wrap} ${stylesCss.heroBg}`}>
-				<div className={styles.content}>
-					<header className={styles.h1}>
-						<span className={styles.title}>Оформление контракта на СВО</span>
-						<br />
-						<span className={styles.subtitle}>
-							официальное сопровождение и <br className='min-[768px]:hidden' />{' '}
-							выплаты до 7 000 000{' '}
-							<br className='hidden min-[768px]:block min-[1199px]:hidden' />{' '}
-							руб.
-						</span>
-					</header>
+		<section className='mt-4 px-2.5 lg:px-5'>
+			<div
+				className={[
+					stylesCss.heroBg,
+					// карточка
+					'relative mx-auto w-full overflow-hidden rounded-[30px]',
+					'w-full  md:max-w-[1200px]',
+					// нужная высота на средних экранах
+					'min-h-[clamp(420px,55vw,620px)]',
+					// ✅ ВАЖНО: делаем контейнер flex, чтобы управлять вертикалью контента
+					'flex',
+					// паддинги плавно
+					'px-[clamp(20px,3vw,44px)] py-[clamp(20px,3.2vw,48px)]',
+					'text-white',
+				].join(' ')}
+			>
+				{/* ✅ ВАЖНО: этот блок растягивается по высоте hero */}
+				<div className='relative z-10 flex w-full'>
+					{/* ✅ ВАЖНО: на больших экранах центрируем по вертикали (без скачков) */}
+					<div className='flex w-full  items-end md:items-center'>
+						{/* Левый контент */}
+						<div className='w-full max-w-[350px] min-[550px]:max-w-[500px] md:max-w-[550px] xl:max-w-[650px] flex flex-col '>
+							<div className='font-golos pb-[15px] min-[425px]:pb-[10px] xl:pb-[25px] min-[559px]:pb-[50px] '>
+								<h1 className='font-semibold  text-[20px]  md:text-[24px] lg:text-[30px] xl:text-[45px] '>
+									Оформление контракта на СВО
+								</h1>
 
-					<ul className={styles.list}>
-						<li>
-							Поможем пройти ВВК, подготовим документы и сопроводим до пункта
-							подписания.
-						</li>
-						<li>
-							Единовременная выплата до 3 000 000 руб. и ежемесячное довольствие
-							от 210 000 руб.
-						</li>
-						<li>
-							Работаем официально. Все условия - по приказам и постановлениям
-							Минобороны РФ
-						</li>
-					</ul>
+								<p className='mt-[clamp(6px,1vw,10px)] font-normal text-[18px] md:text-[22px] lg:text-[26px] xl:text-[35px] '>
+									официальное сопровождение и выплаты до 7 000 000 руб.
+								</p>
+							</div>
 
-					<button className={styles.btn}>
-						Записаться на оформление контракта
-					</button>
+							<div className='flex flex-col gap-2.5 min-[375px]:gap-5 font-golos  text-[14px] md:text-[16px] min-[426px]:mb-2.5 lg:text-[21px]'>
+								<p>
+									Поможем пройти ВВК, подготовим документы и сопроводим до
+									пункта подписания.
+								</p>
+								<p>
+									Единовременная выплата до 3 000 000 руб. и ежемесячное
+									довольствие от 210 000 руб.
+								</p>
+								<p>
+									Работаем официально. Все условия - по приказам и
+									постановлениям Минобороны РФ
+								</p>
+							</div>
+
+							<button
+								className={[
+									// мобилка: во всю ширину
+									'w-full',
+									// ширина кнопки плавная
+									'md:max-w-[450px]',
+									'h-[37px] md:h-[62px]',
+									'rounded-[10px]',
+									'bg-contrast shadow-btn',
+									'text-[14px] md:text-[18px] font-inter font-semibold',
+									'cursor-pointer',
+									'mt-[clamp(20px,1.2vw,14px)] min-[960px]:mt-[50px]',
+									'px-4 sm:px-6 xl:mt-[20px]',
+								].join(' ')}
+							>
+								Записаться на оформление контракта
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 

@@ -13,10 +13,8 @@
 	overflow: hidden;
 }
 
-@media (min-width: 959px) {
-	.heroBg {
-		border-radius: 40px;
-	}
+.heroBg {
+	border-radius: 30px;
 }
 
 .heroBg::before {

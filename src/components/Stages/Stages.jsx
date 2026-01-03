@@ -10,11 +10,11 @@ const Stages = () => {
 		'flex gap-2.5 bg-white rounded-[20px] border-3 border-dashed border-[#797c85]/60 pl-7.5 p-5'
 
 	return (
-		<section className='relative flex flex-col justify-center items-start pb-5 lg:pb-[30px] xl:pb-[40px] pt-5'>
+		<section className='relative flex flex-col justify-center items-start pb-5 lg:pb-[30px] xl:pb-[40px] pt-5 px-2.5 min-[1199px]:px-[20px]'>
 			{/* белый фон на всю ширину */}
 			<div className='absolute inset-0 left-1/2 -translate-x-1/2 w-screen bg-white -z-10' />
 
-			<div className='w-full px-2.5 max-w-[405px] max-[766px]:max-w-none md:max-w-none'>
+			<div className='w-full  max-w-[405px] max-[766px]:max-w-none md:max-w-none'>
 				<div className='w-full max-w-[405px] max-[766px]:max-w-none md:max-w-none'>
 					<h2 className='w-full text-contrast max-w-[365px] max-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] lg:text-[30px] xl:text-[40px] md:max-w-none'>
 						Этапы заключения контракта
