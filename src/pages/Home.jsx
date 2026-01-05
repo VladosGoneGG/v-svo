@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer'
 import Foreigners from '../components/Foreigners/Foreigners'
 import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
+import Papers from '../components/Papers/Papers'
 import Possibilities from '../components/Possibilities/Possibilities'
 import Questions from '../components/Questions/Questions'
 import Requirements from '../components/Requirements/Requirements'
@@ -28,6 +29,7 @@ const Home = () => {
 				<Specialties />
 				<Stages />
 				<Possibilities />
+				<Papers />
 				<Foreigners />
 				<Feedback />
 				<Questions />

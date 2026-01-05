@@ -3,15 +3,23 @@ import StIcon2 from '../../assets/svg/st-2.svg?react'
 import StIcon3 from '../../assets/svg/st-3.svg?react'
 import StIcon4 from '../../assets/svg/st-4.svg?react'
 import StIcon5 from '../../assets/svg/st-5.svg?react'
+import DashedBorder from '../DashedBorder/DashedBorder'
 
 const Stages = () => {
-	// общий класс для пунктирных карточек (только Tailwind)
+	// общий класс для пунктирных карточек (твои стили не ломаю)
 	const dashedCard =
-		'flex gap-2.5 bg-white rounded-[20px] border-3 border-dashed border-[#797c85]/60 pl-7.5 p-5'
+		'relative overflow-hidden flex gap-2.5 bg-white rounded-[20px] pl-7.5 p-5'
+
+	// настройки твоего кастомного бордера (как было в figma-подобном стиле)
+	const borderProps = {
+		stroke: 'rgba(121,124,133,0.6)',
+		strokeWidth: 2,
+		dashArray: '2.5 2.5',
+		radius: 8,
+	}
 
 	return (
 		<section className='relative flex flex-col justify-center items-start pb-5 lg:pb-[30px] xl:pb-[40px] pt-5 px-2.5 min-[1199px]:px-[20px]'>
-			{/* белый фон на всю ширину */}
 			<div className='absolute inset-0 left-1/2 -translate-x-1/2 w-screen bg-white -z-10' />
 
 			<div className='w-full  max-w-[405px] max-[766px]:max-w-none md:max-w-none'>
@@ -25,7 +33,9 @@ const Stages = () => {
 					<ul className='flex flex-col md:grid md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-2.5 lg:grid-cols-3 font-golos xl:min-h-[491px]'>
 						{/* 1 */}
 						<li className={dashedCard}>
-							<div className='flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+							<DashedBorder {...borderProps} />
+
+							<div className='relative z-10 flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] text-contrast font-semibold'>
 									Оставьте заявку
 								</p>
@@ -35,7 +45,8 @@ const Stages = () => {
 									информацию о службе по контракту
 								</p>
 							</div>
-							<div className='flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
+
+							<div className='relative z-10 flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
 								<StIcon1 className='[&_*]:!fill-[#797c85]' />
 								<p className='text-[18px] text-contrast font-semibold'>01</p>
 							</div>
@@ -43,7 +54,9 @@ const Stages = () => {
 
 						{/* 2 */}
 						<li className={dashedCard}>
-							<div className='flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+							<DashedBorder {...borderProps} />
+
+							<div className='relative z-10 flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] text-contrast font-semibold'>
 									Консультация
 								</p>
@@ -54,7 +67,8 @@ const Stages = () => {
 									каждом этапе оформления
 								</p>
 							</div>
-							<div className='flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
+
+							<div className='relative z-10 flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
 								<StIcon2 className='[&_*]:!fill-[#797c85]' />
 								<p className='text-[18px] text-contrast font-semibold'>02</p>
 							</div>
@@ -62,7 +76,9 @@ const Stages = () => {
 
 						{/* 3 */}
 						<li className={`${dashedCard} lg:col-start-1 lg:row-start-2`}>
-							<div className='flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+							<DashedBorder {...borderProps} />
+
+							<div className='relative z-10 flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] text-contrast font-semibold'>
 									Подготовка и выезд
 								</p>
@@ -73,7 +89,8 @@ const Stages = () => {
 									пункту оформления
 								</p>
 							</div>
-							<div className='flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
+
+							<div className='relative z-10 flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
 								<StIcon3 className='[&_*]:!fill-[#797c85]' />
 								<p className='text-[18px] text-contrast font-semibold'>03</p>
 							</div>
@@ -81,7 +98,9 @@ const Stages = () => {
 
 						{/* 4 */}
 						<li className={`${dashedCard} lg:col-start-2 lg:row-start-2`}>
-							<div className='flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
+							<DashedBorder {...borderProps} />
+
+							<div className='relative z-10 flex w-full min-[425px]:max-w-[414px] min-[525px]:max-w-[600px] flex-col gap-2.5'>
 								<p className='text-[20px] text-contrast font-semibold'>
 									Оформление и подписание контракта
 								</p>
@@ -92,7 +111,8 @@ const Stages = () => {
 									выплаты и льготы
 								</p>
 							</div>
-							<div className='flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
+
+							<div className='relative z-10 flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
 								<StIcon4 className='[&_*]:!fill-[#797c85]' />
 								<p className='text-[18px] text-contrast font-semibold'>04</p>
 							</div>
@@ -103,7 +123,9 @@ const Stages = () => {
 							<div className='flex flex-col gap-2.5 h-full'>
 								{/* 5 */}
 								<div className={`${dashedCard} lg:min-h-[312px]`}>
-									<div className='flex w-full flex-col gap-2.5'>
+									<DashedBorder {...borderProps} />
+
+									<div className='relative z-10 flex w-full flex-col gap-2.5'>
 										<p className='text-[20px] text-contrast font-semibold'>
 											Начало службы
 										</p>
@@ -117,7 +139,8 @@ const Stages = () => {
 											адаптации
 										</p>
 									</div>
-									<div className='flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
+
+									<div className='relative z-10 flex w-[45px] h-[90px] mt-2.5 justify-center items-center flex-col gap-5'>
 										<StIcon5 className='[&_*]:!fill-[#797c85]' />
 										<p className='text-[18px] text-contrast font-semibold'>
 											05
@@ -144,7 +167,9 @@ const Stages = () => {
 
 						{/* 5 и 6 для md / sm */}
 						<li className={`${dashedCard} lg:hidden`}>
-							<div className='flex gap-2.5 rounded-[20px] w-full'>
+							<DashedBorder {...borderProps} />
+
+							<div className='relative z-10 flex gap-2.5 rounded-[20px] w-full'>
 								<div className='flex w-full flex-col gap-2.5'>
 									<p className='text-[20px] text-contrast font-semibold'>
 										Начало службы
