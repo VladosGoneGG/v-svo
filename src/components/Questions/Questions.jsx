@@ -121,12 +121,12 @@ function AccordionItem({ q, a, isOpen, onToggle, btnId, panelId }) {
 					aria-expanded={isOpen}
 					aria-controls={panelId}
 					id={btnId}
-					className='w-full text-left'
+					className='w-full text-left cursor-pointer'
 				>
 					<div className='flex items-start justify-between gap-5 pt-3 min-h-[74px]'>
 						<span
 							className={[
-								'font-golos font-semibold text-[18px]',
+								'font-golos font-semibold text-[18px] ',
 								'transition-colors duration-300 ease-in-out',
 								isOpen ? 'text-contrast' : 'text-[#1D1E21]',
 							].join(' ')}

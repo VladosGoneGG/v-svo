@@ -36,8 +36,8 @@ const Papers = () => {
 						<li className='h-full  relative overflow-hidden rounded-[10px] bg-white'>
 							{/* рамка (слоем) */}
 							<DashedBorder
-								radius={8}
-								dashArray='2.5 2.5'
+								radius={20}
+								dashArray='10 10'
 								stroke='#D14E15'
 								strokeWidth={2}
 							/>
@@ -62,8 +62,8 @@ const Papers = () => {
 						<li className='h-full   relative overflow-hidden rounded-[10px] bg-white'>
 							{/* рамка (слоем) */}
 							<DashedBorder
-								radius={8}
-								dashArray='2.5 2.5'
+								radius={20}
+								dashArray='10 10'
 								stroke='#D14E15'
 								strokeWidth={2}
 							/>
@@ -89,8 +89,8 @@ const Papers = () => {
 						<li className='h-full relative overflow-hidden rounded-[10px] bg-white'>
 							{/* рамка (слоем) */}
 							<DashedBorder
-								radius={8}
-								dashArray='2.5 2.5'
+								radius={20}
+								dashArray='10 10'
 								stroke='#D14E15'
 								strokeWidth={2}
 							/>
@@ -116,8 +116,8 @@ const Papers = () => {
 						<li className='h-full   relative overflow-hidden rounded-[10px] bg-white'>
 							{/* рамка (слоем) */}
 							<DashedBorder
-								radius={8}
-								dashArray='2.5 2.5'
+								radius={20}
+								dashArray='10 10'
 								stroke='#D14E15'
 								strokeWidth={2}
 							/>

@@ -32,12 +32,7 @@ const Requirements = () => {
 								className='w-[95px] h-[95px] mt-2.5 mr-2.5 bg-white rounded-[10px] flex items-center justify-center shrink-0'
 								aria-label='Герб'
 							>
-								{/* фиксируем размер самого SVG, чтобы он не “гулял” */}
-
 								<img src={Gerb} alt='Герб' />
-								{/* если хочешь, чтобы он занимал весь квадрат 95x95:
-                    <Gerb className='w-full h-full p-2.5' />
-                */}
 							</div>
 						</div>
 

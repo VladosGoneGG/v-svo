@@ -1,5 +1,7 @@
+import Answers from '../components/Answers/Answers'
 import Benifits from '../components/Benifits/Benifits'
 import Compensations from '../components/Compensations/Compensations'
+import Consultation from '../components/Consultation/Consultation'
 import Equipment from '../components/Equipment/Equipment'
 import Feedback from '../components/Feedback/Feedback'
 import Footer from '../components/Footer/Footer'
@@ -24,6 +26,7 @@ const Home = () => {
 				<Compensations />
 				<Benifits />
 				<Vacansies />
+				<Answers />
 				<Equipment />
 				<Requirements />
 				<Specialties />
@@ -33,6 +36,7 @@ const Home = () => {
 				<Foreigners />
 				<Feedback />
 				<Questions />
+				<Consultation />
 			</main>
 
 			<Footer />

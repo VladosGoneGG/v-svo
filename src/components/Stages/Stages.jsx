@@ -14,8 +14,8 @@ const Stages = () => {
 	const borderProps = {
 		stroke: 'rgba(121,124,133,0.6)',
 		strokeWidth: 2,
-		dashArray: '2.5 2.5',
-		radius: 8,
+		dashArray: '10 10',
+		radius: 20,
 	}
 
 	return (
