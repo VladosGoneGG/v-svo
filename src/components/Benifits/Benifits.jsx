@@ -1,4 +1,12 @@
+import { AnimatePresence, motion } from 'motion/react'
+import { useMemo, useState } from 'react'
+
 const BUTTONS = [{ label: 'Военнослужащим' }, { label: 'Семьям' }]
+
+const START_NUM = {
+	0: 1,
+	1: 10,
+}
 
 const BENEFITS = [
 	{
@@ -40,14 +48,32 @@ const BENEFITS = [
 	},
 ]
 
-const btnCls =
-	'flex-1 min-w-0 h-[37px] lg:h-[49px] ' +
-	'flex items-center justify-center ' +
-	'px-7.5 ' +
-	'bg-contrast text-white ' +
-	'shadow-btn rounded-[10px] ' +
-	'font-inter font-semibold max-[325px]:text-[12px] text-[14px] lg:text-[16px] ' +
-	'cursor-pointer'
+const FAMILY_BENEFITS = [
+	{
+		title: 'Льготы на образование детей',
+		text: 'Детский сад вне очереди, бесплатное питание в детском саду, школе, бесплатная продленка, бесплатное обучение в колледже и т. д.',
+	},
+	{
+		title: 'Бюджетные места для обучения детей в вузах',
+		text: 'Дети раненых и погибших могут поступить без вступительных испытаний.',
+	},
+	{
+		title: 'Бесплатный отдых в лагерях для детей',
+		text: 'Для этого необходимо заполнить заявку на сайте центра «Ял». Ребенок отправится в лагерь после проверки данных.',
+	},
+	{
+		title: 'Бесплатный проезд на транспорте',
+		text: 'Льгота предоставляется детям от 8 до 18 лет (включительно) на все виды общественного транспорта (трамвай, троллейбус, автобус, метро).',
+	},
+	{
+		title: 'Подарки новорожденным',
+		text: 'Подарочные комплекты детских принадлежностей всем семьям с новорожденными.',
+	},
+	{
+		title: 'Путевки в организации отдыха',
+		text: 'Один раз в год предоставляются путевки на лечение по себестоимости семьям с детьми от 7 до 17 лет (включительно).',
+	},
+]
 
 const liCls = 'flex gap-5'
 const numWrapCls =
@@ -56,44 +82,118 @@ const titleCls = 'font-golos font-semibold text-contrast text-[20px]'
 const textCls = 'font-golos font-medium text-black text-[14px]'
 
 const Benifits = () => {
+	const [active, setActive] = useState(0)
+
+	const activeBenefits = useMemo(
+		() => (active === 0 ? BENEFITS : FAMILY_BENEFITS),
+		[active]
+	)
+
+	const btnBase =
+		'relative flex-1 min-w-0 h-[37px] lg:h-[49px] ' +
+		'flex items-center justify-center ' +
+		'px-7.5 ' +
+		'rounded-[10px] ' +
+		'font-golos font-semibold max-[325px]:text-[12px] text-[14px] lg:text-[16px] ' +
+		'cursor-pointer select-none ' +
+		'transition-colors duration-300'
+
+	// убираем “пустоты”: min-h только для первой вкладки (где много пунктов)
+	const listMinH =
+		active === 0 ? 'md:min-h-[737px] lg:min-h-[559px]' : 'md:min-h-0 lg:min-h-0'
+
 	return (
 		<section className='flex flex-col items-center mb-5 lg:mb-[30px] xl:mb-[40px] pt-5 '>
 			<div className='flex flex-col gap-5 w-full px-2.5  min-[1199px]:px-[20px]'>
 				<div className='w-full max-w-[405px] max-[766px]:max-w-none  md:max-w-none'>
-					<h2 className='w-full text-contrast max-w-[365px] max-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] px-5 lg:text-[30px] xl:text-[40px]  md:max-w-none'>
+					<h2 className='w-full text-contrast max-w-[365px] max-[766px]:max-w-none font-golos font-semibold text-[20px] md:text-[24px] px-5 lg:text-[30px] xl:text-[40px]  md:max-w-none'>
 						Льготы и гарантии участникам СВО от государства
 					</h2>
 				</div>
 
-				<div className='flex w-full p-2.5 gap-2.5 justify-center items-center border-2 border-dashed border-[#797c85] rounded-[20px]'>
-					{BUTTONS.map(b => (
-						<button key={b.label} className={btnCls}>
-							{b.label}
-						</button>
-					))}
+				{/* Переключатель */}
+				<div className='relative isolate overflow-hidden flex w-full p-2.5 gap-2.5 justify-center items-center border-2 border-dashed border-[#797c85] rounded-[20px] bg-[#ebebeb]'>
+					{BUTTONS.map((b, idx) => {
+						const isActive = idx === active
+
+						return (
+							<button
+								key={b.label}
+								type='button'
+								onClick={() => setActive(idx)}
+								className={[
+									btnBase,
+									// кнопки всегда "чистые"
+									'bg-transparent shadow-none',
+								].join(' ')}
+							>
+								{isActive && (
+									<motion.span
+										layoutId='benefits-pill'
+										className='absolute inset-0 rounded-[10px] bg-contrast shadow-btn'
+										transition={{
+											type: 'spring',
+											stiffness: 520,
+											damping: 48,
+											mass: 0.9,
+										}}
+									/>
+								)}
+
+								{/* цвет текста анимируем, больше нет скачков/рассинхрона */}
+								<motion.span
+									className='relative z-10'
+									animate={{ color: isActive ? '#ffffff' : '#000000' }}
+									transition={{
+										type: 'spring',
+										stiffness: 520,
+										damping: 48,
+										mass: 0.9,
+									}}
+								>
+									{b.label}
+								</motion.span>
+							</button>
+						)
+					})}
 				</div>
 
 				<div className='w-full h-[1px] rounded-[1px] bg-[#797c85]'></div>
 
-				<ul className='w-full flex flex-col gap-5 md:grid md:grid-cols-2 md:gap-5 md:min-h-[737px] lg:grid-cols-3 lg:min-h-[559px]'>
-					{BENEFITS.map((b, idx) => {
-						const num = String(idx + 1).padStart(2, '0')
-						return (
-							<li key={b.title} className={`${liCls} ${b.liClass ?? ''}`}>
-								<div className={numWrapCls}>
-									<span className='font-inter font-semibold text-[16px] text-white'>
-										{num}
-									</span>
-								</div>
+				{/* Список: плавно появляется/исчезает при переключении */}
+				<AnimatePresence mode='wait'>
+					<motion.ul
+						key={active}
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: 10 }}
+						transition={{ duration: 0.25, ease: 'easeOut' }}
+						className={[
+							'w-full flex flex-col gap-5 md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3',
+							listMinH,
+						].join(' ')}
+					>
+						{activeBenefits.map((b, idx) => {
+							const start = START_NUM[active] ?? 1
+							const num = String(start + idx).padStart(2, '0')
 
-								<div className='flex flex-col gap-2.5'>
-									<p className={titleCls}>{b.title}</p>
-									<p className={textCls}>{b.text}</p>
-								</div>
-							</li>
-						)
-					})}
-				</ul>
+							return (
+								<li key={b.title} className={`${liCls} ${b.liClass ?? ''}`}>
+									<div className={numWrapCls}>
+										<span className='font-inter font-semibold text-[16px] text-white'>
+											{num}
+										</span>
+									</div>
+
+									<div className='flex flex-col gap-2.5'>
+										<p className={titleCls}>{b.title}</p>
+										<p className={textCls}>{b.text}</p>
+									</div>
+								</li>
+							)
+						})}
+					</motion.ul>
+				</AnimatePresence>
 			</div>
 		</section>
 	)

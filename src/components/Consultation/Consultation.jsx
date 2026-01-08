@@ -36,7 +36,7 @@ const Consultation = () => {
 		defaultValues: {
 			name: '',
 			phone: '',
-			agree: true,
+			agree: false,
 		},
 		mode: 'onSubmit',
 	})
