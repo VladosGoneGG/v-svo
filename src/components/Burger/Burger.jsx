@@ -1,44 +1,52 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback } from 'react'
+import { Link } from 'react-router-dom'
+
 import Telega from '../../assets/images/telegrami.png'
 import Logo from '../../assets/svg/Logo.svg?react'
+import { useGoHome } from '../../hooks/useGoHome'
 import { usePopupFlow } from '../../hooks/usePopupFlow'
+import { useScrollNav } from '../../hooks/useScrollNav'
+
 import Modal from '../Modal/Modal'
 import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
 
 const NAV = [
-	{ label: 'Выплаты', href: '#payments' },
-	{ label: 'Льготы', href: '#benefits' },
-	{ label: 'Требования', href: '#requirements' },
-	{ label: 'Документы', href: '#documents' },
-	{ label: 'Специализации', href: '#specializations' },
-	{ label: 'Блог', href: '#blog' },
+	{ label: 'Выплаты', href: '#payments', type: 'hash' },
+	{ label: 'Льготы', href: '#benefits', type: 'hash' },
+	{ label: 'Требования', href: '#requirements', type: 'hash' },
+	{ label: 'Документы', href: '#documents', type: 'hash' },
+	{ label: 'Специализации', href: '#specializations', type: 'hash' },
+	{ label: 'Блог', href: '/blog', type: 'route' },
 ]
 
 const Burger = ({ open, onClose }) => {
 	const callPopup = usePopupFlow()
+	const scrollNav = useScrollNav()
+	const goHome = useGoHome()
 
-	const handleNavClick = useCallback(
-		href => {
+	const handleHashClick = useCallback(
+		hash => {
 			onClose?.()
-
+			// чуть ждём анимацию закрытия, чтобы не дёргалось
 			setTimeout(() => {
-				const el = document.querySelector(href)
-				if (el) {
-					el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-				}
-			}, 100)
+				scrollNav(hash)
+			}, 220)
 		},
-		[onClose]
+		[onClose, scrollNav]
 	)
+
+	const handleGoHome = useCallback(() => {
+		onClose?.()
+		setTimeout(() => {
+			goHome()
+		}, 220)
+	}, [onClose, goHome])
 
 	// открытие модалки из бургер-меню
 	const handleCallClick = useCallback(() => {
-		// закрываем меню
 		onClose?.()
-
-		// ждём анимацию закрытия и открываем модалку
 		setTimeout(() => {
 			callPopup.open()
 		}, 220)
@@ -78,7 +86,15 @@ const Burger = ({ open, onClose }) => {
 						>
 							{/* TOP */}
 							<div className='flex items-start justify-between'>
-								<a href='/' onClick={onClose} aria-label='На главную'>
+								{/* Лого: всегда на главную и вверх */}
+								<a
+									href='/'
+									onClick={e => {
+										e.preventDefault()
+										handleGoHome()
+									}}
+									aria-label='На главную'
+								>
 									<Logo />
 								</a>
 
@@ -105,16 +121,26 @@ const Burger = ({ open, onClose }) => {
 									>
 										{NAV.map(item => (
 											<li key={item.label}>
-												<a
-													href={item.href}
-													onClick={e => {
-														e.preventDefault()
-														handleNavClick(item.href)
-													}}
-													className='inline-block'
-												>
-													{item.label}
-												</a>
+												{item.type === 'hash' ? (
+													<a
+														href={item.href}
+														onClick={e => {
+															e.preventDefault()
+															handleHashClick(item.href)
+														}}
+														className='inline-block'
+													>
+														{item.label}
+													</a>
+												) : (
+													<Link
+														to={item.href}
+														onClick={onClose}
+														className='inline-block'
+													>
+														{item.label}
+													</Link>
+												)}
 											</li>
 										))}
 									</ul>

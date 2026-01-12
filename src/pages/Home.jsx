@@ -1,3 +1,6 @@
+import { Helmet } from '@dr.pogodin/react-helmet'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Answers from '../components/Answers/Answers'
 import Benifits from '../components/Benifits/Benifits'
 import Compensations from '../components/Compensations/Compensations'
@@ -17,30 +20,51 @@ import Stages from '../components/Stages/Stages'
 import Vacansies from '../components/Vacansies/Vacansies'
 
 const Home = () => {
+	const { hash } = useLocation()
+
+	useEffect(() => {
+		if (!hash) return
+		const el = document.querySelector(hash)
+		if (!el) return
+		// небольшой таймаут, чтобы DOM секций точно был отрендерен
+		setTimeout(() => {
+			el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+		}, 0)
+	}, [hash])
 	return (
-		<div className='min-h-screen flex flex-col w-full max-w-300 min-[1200px]:mx-auto '>
-			<Header />
+		<>
+			<Helmet>
+				<title>Название сайта — Главная</title>
+				<meta
+					name='description'
+					content='Краткое и понятное описание главной страницы для поисковиков.'
+				/>
+			</Helmet>
 
-			<main className='flex-1 mt-2.5'>
-				<Hero />
-				<Compensations />
-				<Benifits />
-				<Vacansies />
-				<Answers />
-				<Equipment />
-				<Requirements />
-				<Specialties />
-				<Stages />
-				<Possibilities />
-				<Papers />
-				<Foreigners />
-				<Feedback />
-				<Questions />
-				<Consultation />
-			</main>
+			<div className='min-h-screen flex flex-col w-full max-w-300 min-[1200px]:mx-auto '>
+				<Header />
 
-			<Footer />
-		</div>
+				<main className='flex-1 mt-2.5'>
+					<Hero />
+					<Compensations />
+					<Benifits />
+					<Vacansies />
+					<Answers />
+					<Equipment />
+					<Requirements />
+					<Specialties />
+					<Stages />
+					<Possibilities />
+					<Papers />
+					<Foreigners />
+					<Feedback />
+					<Questions />
+					<Consultation />
+				</main>
+
+				<Footer />
+			</div>
+		</>
 	)
 }
 

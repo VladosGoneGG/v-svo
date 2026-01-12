@@ -1,22 +1,16 @@
-import { usePopupFlow } from '../../hooks/usePopupFlow'
-
-import { useCallback } from 'react'
 import Telega from '../../assets/images/telegrami.png'
 import Logo from '../../assets/svg/Logo.svg?react'
-
+import { useGoHome } from '../../hooks/useGoHome'
+import { usePopupFlow } from '../../hooks/usePopupFlow'
+import { useScrollNav } from '../../hooks/useScrollNav'
 import Modal from '../Modal/Modal'
 import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
 
 const Footer = () => {
 	const callPopup = usePopupFlow()
-
-	const handleNavClick = useCallback(href => {
-		const el = document.querySelector(href)
-		if (!el) return
-		el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-	}, [])
-
+	const scrollNav = useScrollNav()
+	const goHome = useGoHome()
 	return (
 		<footer className='relative w-full'>
 			<div className='absolute inset-0 left-1/2 -translate-x-1/2 w-screen bg-[#1d1e21] -z-10' />
@@ -34,7 +28,13 @@ const Footer = () => {
 			>
 				<div className='flex flex-col pl-10 items-center gap-5 min-[426px]:flex-row min-[426px]:items-start min-[426px]:justify-between'>
 					<div className='flex flex-col items-start gap-2.5 w-full min-[426px]:max-w-75 min-[1200px]:gap-5'>
-						<Logo />
+						<Logo
+							onClick={e => {
+								e.preventDefault()
+								goHome()
+							}}
+							className='cursor-pointer'
+						/>
 
 						<div className='flex items-center gap-2.5'>
 							<a
@@ -153,67 +153,76 @@ const Footer = () => {
 								<ul className='flex flex-col gap-1.5 font-golos font-medium text-[12px] min-[569px]:text-[14px] '>
 									<li>
 										<a
-											href='/'
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											onClick={e => {
+												e.preventDefault()
+												goHome()
+											}}
 										>
 											Главная
 										</a>
 									</li>
+
 									<li>
 										<a
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
 											onClick={e => {
 												e.preventDefault()
-												handleNavClick('#payments')
+												scrollNav('#payments')
 											}}
 										>
 											Выплаты
 										</a>
 									</li>
+
 									<li>
 										<a
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
 											onClick={e => {
 												e.preventDefault()
-												handleNavClick('#benefits')
+												scrollNav('#benefits')
 											}}
 										>
 											Льготы
 										</a>
 									</li>
+
 									<li>
 										<a
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
 											onClick={e => {
 												e.preventDefault()
-												handleNavClick('#requirements')
+												scrollNav('#requirements')
 											}}
 										>
 											Требования
 										</a>
 									</li>
+
 									<li>
 										<a
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
 											onClick={e => {
 												e.preventDefault()
-												handleNavClick('#documents')
+												scrollNav('#documents')
 											}}
 										>
 											Документы
 										</a>
 									</li>
+
 									<li>
 										<a
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
 											onClick={e => {
 												e.preventDefault()
-												handleNavClick('#foreigners')
+												scrollNav('#foreigners')
 											}}
 										>
 											Мигрантам
 										</a>
 									</li>
+
 									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
 										Сотрудничество
 									</li>

@@ -50,7 +50,10 @@ const VACANCIES = [
 
 const Vacansies = () => {
 	return (
-		<section className='relative flex flex-col items-center pb-5 lg:pb-[30px] xl:pb-[40px] pt-5 lg:pt-7.5'>
+		<section
+			id='specializations'
+			className='relative flex flex-col items-center pb-5 lg:pb-[30px] xl:pb-[40px] pt-5 lg:pt-7.5 scroll-mt-20'
+		>
 			{/* фон на всю ширину */}
 			<Fullbleed className='bg-white' />
 

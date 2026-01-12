@@ -1,9 +1,6 @@
 const Specialties = () => {
 	return (
-		<section
-			id='specializations'
-			className='py-5 lg:py-[30px] xl:py-[40px]  scroll-mt-20'
-		>
+		<section className='py-5 lg:py-[30px] xl:py-[40px]  '>
 			<div className='w-full flex flex-col gap-5 px-2.5 min-[1199px]:px-[20px]'>
 				<h2
 					className='

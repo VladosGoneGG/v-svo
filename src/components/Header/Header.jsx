@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Logo from '../../assets/svg/Logo.svg?react'
 import Tg from '../../assets/svg/telegram.svg?react'
 import { usePopupFlow } from '../../hooks/usePopupFlow'
@@ -10,12 +11,26 @@ import Popupok from '../Popupok/Popupok'
 const Header = () => {
 	const [isBurgerOpen, setIsBurgerOpen] = useState(false)
 
-	const handleNavClick = useCallback(href => {
-		const el = document.querySelector(href)
-		if (!el) return
-		el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-	}, [])
+	const location = useLocation()
+	const navigate = useNavigate()
 
+	const handleNavClick = useCallback(
+		hash => {
+			// если мы не на главной — сначала переходим на неё с hash
+			if (location.pathname !== '/') {
+				navigate(`/${hash}`)
+				setIsBurgerOpen(false)
+				return
+			}
+
+			// если уже на главной — просто скроллим
+			const el = document.querySelector(hash)
+			if (!el) return
+			el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+			setIsBurgerOpen(false)
+		},
+		[location.pathname, navigate]
+	)
 	const callPopup = usePopupFlow()
 
 	useEffect(() => {
@@ -44,9 +59,9 @@ const Header = () => {
       '
 		>
 			<div className=' flex items-center justify-between p-2.5 min-[960px]:p-5'>
-				<a href='/'>
+				<Link to='/'>
 					<Logo />
-				</a>
+				</Link>
 
 				<ul className='hidden font-golos font-medium text-[14px] w-123.25 h-6.75 min-[960px]:flex items-center justify-between min-[1200px]:text-[16px] min-[1200px]:w-137.75 min-[1200px]:h-7.25 '>
 					<li>
@@ -95,19 +110,23 @@ const Header = () => {
 					</li>
 					<li>
 						<a
-							href='/'
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							onClick={e => {
+								e.preventDefault()
+								handleNavClick('#specializations')
+							}}
 						>
 							Специализации
 						</a>
 					</li>
 					<li>
-						<a
-							href='/'
+						<Link
+							to='/blog'
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							onClick={() => setIsBurgerOpen(false)}
 						>
 							Блог
-						</a>
+						</Link>
 					</li>
 				</ul>
 
