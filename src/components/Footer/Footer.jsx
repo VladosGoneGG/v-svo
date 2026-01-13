@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom'
 import Telega from '../../assets/images/telegrami.png'
 import Logo from '../../assets/svg/Logo.svg?react'
+import { useFooterLinks } from '../../hooks/useFooterLinks'
 import { useGoHome } from '../../hooks/useGoHome'
 import { usePopupFlow } from '../../hooks/usePopupFlow'
 import { useScrollNav } from '../../hooks/useScrollNav'
+
 import Modal from '../Modal/Modal'
 import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
@@ -11,6 +14,13 @@ const Footer = () => {
 	const callPopup = usePopupFlow()
 	const scrollNav = useScrollNav()
 	const goHome = useGoHome()
+
+	const { data } = useFooterLinks()
+
+	const specAndProf = data?.specAndProf ?? []
+	const units = data?.units ?? []
+	const cities = data?.cities ?? []
+
 	return (
 		<footer className='relative w-full'>
 			<div className='absolute inset-0 left-1/2 -translate-x-1/2 w-screen bg-[#1d1e21] -z-10' />
@@ -63,93 +73,81 @@ const Footer = () => {
 
 					<div className='w-full min-w-0 flex justify-start min-[426px]:justify-center'>
 						<div className='grid w-full max-w-86.25 grid-cols-2 gap-6 min-[960px]:max-w-209.75 min-[960px]:flex min-[960px]:justify-evenly'>
+							{/* Специализации / Профессии */}
 							<div>
 								<h4 className='font-inter font-semibold text-[14px] min-[569px]:text-[18px] mb-2'>
 									Специализации
 								</h4>
+
 								<ul className='flex flex-col gap-1.5 font-golos font-medium text-[12px] min-[569px]:text-[14px]'>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Оператор БПЛА
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										РЭБ
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Водитель
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Артиллерия
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Штурмовик
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Врач
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Повар
-									</li>
+									{specAndProf.map(item => {
+										const to =
+											item.type === 'profession'
+												? `/profession/${item.slug}`
+												: `/specialization/${item.slug}`
+
+										return (
+											<li key={`${item.type}-${item.slug}`}>
+												<Link
+													to={to}
+													className='cursor-pointer hover:text-contrast active:text-contrast/70'
+												>
+													{item.label}
+												</Link>
+											</li>
+										)
+									})}
 								</ul>
 							</div>
 
+							{/* Войска */}
 							<div>
 								<h4 className='font-inter font-semibold text-[14px] min-[569px]:text-[18px] mb-2'>
 									Войска
 								</h4>
+
 								<ul className='flex flex-col gap-1.5 font-golos font-medium text-[12px] min-[569px]:text-[14px]'>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Африканский корпус
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										ВДВ
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Морская пехота
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Мотострелковый полк
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Ракетные войска
-									</li>
+									{units.map(item => (
+										<li key={`unit-${item.slug}`}>
+											<Link
+												to={`/unit/${item.slug}`}
+												className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											>
+												{item.label}
+											</Link>
+										</li>
+									))}
 								</ul>
 							</div>
 
 							<div className='col-span-2 h-px bg-white rounded min-[960px]:hidden' />
 
+							{/* Города */}
 							<div>
 								<h4 className='font-inter font-semibold text-[14px] min-[569px]:text-[18px] mb-2'>
 									Города
 								</h4>
+
 								<ul className='flex flex-col gap-1.5 font-golos font-medium text-[12px] min-[569px]:text-[14px]'>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Москва
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Санкт-Петербург
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Казань
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Самара
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Нижний Новгород
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Ульяновск
-									</li>
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
-										Уфа
-									</li>
+									{cities.map(item => (
+										<li key={`city-${item.slug}`}>
+											<Link
+												to={`/city/${item.slug}`}
+												className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											>
+												{item.label}
+											</Link>
+										</li>
+									))}
 								</ul>
 							</div>
 
+							{/* Меню — оставляем твою логику */}
 							<div>
 								<h4 className='font-inter font-semibold text-[14px] min-[569px]:text-[18px] mb-2'>
 									Меню
 								</h4>
+
 								<ul className='flex flex-col gap-1.5 font-golos font-medium text-[12px] min-[569px]:text-[14px] '>
 									<li>
 										<a
@@ -221,6 +219,15 @@ const Footer = () => {
 										>
 											Мигрантам
 										</a>
+									</li>
+
+									<li>
+										<Link
+											to='/blog'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+										>
+											Блог
+										</Link>
 									</li>
 
 									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>

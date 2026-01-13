@@ -48,7 +48,21 @@ const VACANCIES = [
 	},
 ]
 
-const Vacansies = () => {
+const DEFAULT_TEXT = {
+	leftTitle: 'Помогаем поступить в выбранные войска по вашей специализации',
+	leftText:
+		'Мы оформляем отношение в воинскую часть и сопровождаем на всех этапах распределения. В ряде подразделений возможно гарантированное поступление при выполнении требований.',
+}
+
+/**
+ * props (из админки):
+ * - leftTitle?: string
+ * - leftText?: string
+ */
+const Vacansies = ({ leftTitle, leftText }) => {
+	const finalLeftTitle = leftTitle ?? DEFAULT_TEXT.leftTitle
+	const finalLeftText = leftText ?? DEFAULT_TEXT.leftText
+
 	return (
 		<section
 			id='specializations'
@@ -60,13 +74,13 @@ const Vacansies = () => {
 			{/* контент */}
 			<div className='flex flex-col items-center gap-5 lg:gap-7.5 w-full px-2.5 min-[1199px]:px-[20px]'>
 				<div className='w-full '>
-					<h3
+					<h2
 						className='
 							w-full text-contrast min-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] px-5 lg:text-[30px] xl:text-[40px]  md:max-w-none
 						'
 					>
 						Гарантированная помощь в поступлении в желаемые войска
-					</h3>
+					</h2>
 				</div>
 
 				<div className='w-full flex flex-col gap-2.5 md:flex-row sm:items-stretch'>
@@ -81,14 +95,12 @@ const Vacansies = () => {
 						</div>
 
 						<div className='flex flex-col p-5 gap-2.5 text-black'>
-							<p className='font-golos text-contrast font-medium text-[18px] md:text-[22px] lg:text-[24px] xl:text-[30px]'>
-								Помогаем поступить в выбранные войска по вашей специализации
-							</p>
+							<h3 className='font-golos text-contrast font-medium text-[18px] md:text-[22px] lg:text-[24px] xl:text-[30px]'>
+								{finalLeftTitle}
+							</h3>
 
 							<p className='font-golos text-gray-500 font-medium text-[14px] '>
-								Мы оформляем отношение в воинскую часть и сопровождаем на всех
-								этапах распределения. В ряде подразделений возможно
-								гарантированное поступление при выполнении требований.
+								{finalLeftText}
 							</p>
 
 							<p className='font-golos font-semibold text-contrast text-[16px] lg:text-[21px]'>

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './index.css'
 import Blog from './pages/Blog'
+import DynamicPage from './pages/DynamicPage'
 import Home from './pages/Home'
 
 const queryClient = new QueryClient()
@@ -19,6 +20,23 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/blog' element={<Blog />} />
+
+						<Route
+							path='/city/:slug'
+							element={<DynamicPage pageType='city' />}
+						/>
+						<Route
+							path='/specialization/:slug'
+							element={<DynamicPage pageType='specialization' />}
+						/>
+						<Route
+							path='/profession/:slug'
+							element={<DynamicPage pageType='profession' />}
+						/>
+						<Route
+							path='/unit/:slug'
+							element={<DynamicPage pageType='unit' />}
+						/>
 					</Routes>
 				</BrowserRouter>
 			</QueryClientProvider>

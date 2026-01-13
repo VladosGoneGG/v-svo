@@ -6,8 +6,33 @@ import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
 import stylesCss from './Hero.module.css'
 
-const Hero = () => {
+const DEFAULT_CONTENT = {
+	title: 'Оформление контракта на СВО',
+	subtitle: 'официальное сопровождение и выплаты до 7 000 000 руб.',
+	text: [
+		'Поможем пройти ВВК, подготовим документы и сопроводим до пункта подписания.',
+		'Единовременная выплата до 3 000 000 руб. и ежемесячное довольствие от 210 000 руб.',
+		'Работаем официально. Все условия - по приказам и постановлениям Минобороны РФ',
+	],
+}
+
+/**
+ * props:
+ * - title: string
+ * - subtitle: string
+ * - text: string | string[]  (если строка — будет один абзац, если массив — несколько)
+ */
+const Hero = ({ title, subtitle, text }) => {
 	const popup = usePopupFlow()
+
+	const finalTitle = title ?? DEFAULT_CONTENT.title
+	const finalSubtitle = subtitle ?? DEFAULT_CONTENT.subtitle
+
+	const paragraphs = Array.isArray(text)
+		? text
+		: typeof text === 'string' && text.trim()
+		? [text]
+		: DEFAULT_CONTENT.text
 
 	return (
 		<section className='mt-4 px-2.5 lg:px-5'>
@@ -27,27 +52,18 @@ const Hero = () => {
 						<div className='w-full max-w-[350px] min-[550px]:max-w-[500px] md:max-w-[550px] xl:max-w-[650px] flex flex-col '>
 							<div className='font-golos pb-[15px] min-[425px]:pb-[10px] xl:pb-[25px] min-[559px]:pb-[50px] '>
 								<h1 className='font-semibold  text-[20px]  md:text-[24px] lg:text-[30px] xl:text-[45px] '>
-									Оформление контракта на СВО
+									{finalTitle}
 								</h1>
 
 								<p className='mt-[clamp(6px,1vw,10px)] font-normal text-[18px] md:text-[22px] lg:text-[26px] xl:text-[35px] '>
-									официальное сопровождение и выплаты до 7 000 000 руб.
+									{finalSubtitle}
 								</p>
 							</div>
 
 							<div className='flex flex-col gap-2.5 min-[375px]:gap-5 font-golos  text-[14px] md:text-[16px] min-[426px]:mb-2.5 lg:text-[21px]'>
-								<p>
-									Поможем пройти ВВК, подготовим документы и сопроводим до
-									пункта подписания.
-								</p>
-								<p>
-									Единовременная выплата до 3 000 000 руб. и ежемесячное
-									довольствие от 210 000 руб.
-								</p>
-								<p>
-									Работаем официально. Все условия - по приказам и
-									постановлениям Минобороны РФ
-								</p>
+								{paragraphs.map((p, idx) => (
+									<p key={idx}>{p}</p>
+								))}
 							</div>
 
 							<button

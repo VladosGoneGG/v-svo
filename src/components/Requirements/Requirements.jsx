@@ -5,8 +5,17 @@ import Modal from '../Modal/Modal'
 import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
 
-const Requirements = () => {
+const DEFAULT_INTRO_TEXT =
+	'Мы заранее проверим вашу годность, условия ВВК и подскажем, какие документы нужны для допуска к контракту. Консультация бесплатная'
+
+/**
+ * props (из админки):
+ * - introText?: string
+ */
+const Requirements = ({ introText }) => {
 	const popup = usePopupFlow()
+
+	const finalIntroText = introText ?? DEFAULT_INTRO_TEXT
 
 	return (
 		<section
@@ -24,8 +33,7 @@ const Requirements = () => {
 					</h2>
 
 					<p className='w-full font-golos font-normal text-[14px] md:text-[16px] lg:text-[21px] xl:max-w-[508px]'>
-						Мы заранее проверим вашу годность, условия ВВК и подскажем, какие
-						документы нужны для допуска к контракту. Консультация бесплатная
+						{finalIntroText}
 					</p>
 
 					<div className='w-full  flex flex-col gap-5 md:items-end'>

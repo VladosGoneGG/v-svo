@@ -1,4 +1,18 @@
-const Specialties = () => {
+const DEFAULTS = {
+	subtitle:
+		'Контрактная служба позволяет добровольцам поступить в выбранные подразделения и работать по специальности.',
+	text: 'Кандидату предоставляется обучение, экипировка, денежное довольствие и возможность служить в тех войсках, где его навыки наиболее востребованы: РЭБ, артиллерия, ВДВ, Африканский корпус, ракетные войска, морская пехота, мотострелковые части, водители категорий C/D/E, операторы БПЛА и другие направления',
+}
+
+/**
+ * props (из админки):
+ * - subtitle?: string  // первый абзац (подзаголовок/описание)
+ * - text?: string      // второй абзац (серый)
+ */
+const Specialties = ({ subtitle, text }) => {
+	const finalSubtitle = subtitle ?? DEFAULTS.subtitle
+	const finalText = text ?? DEFAULTS.text
+
 	return (
 		<section className='py-5 lg:py-[30px] xl:py-[40px]  '>
 			<div className='w-full flex flex-col gap-5 px-2.5 min-[1199px]:px-[20px]'>
@@ -12,18 +26,16 @@ const Specialties = () => {
 					Контрактная служба СВО по специальностям — возможность выбрать
 					направление и получить обучение
 				</h2>
+
 				<div className='w-full flex flex-col gap-5 font-golos'>
 					<p className='text-[16px] lg:text-[21px] font-normal'>
-						Контрактная служба позволяет добровольцам поступить в выбранные
-						подразделения и работать по специальности.
+						{finalSubtitle}
 					</p>
+
 					<p className='text-[16px] lg:text-[21px] font-normal text-[#797c85]'>
-						Кандидату предоставляется обучение, экипировка, денежное довольствие
-						и возможность служить в тех войсках, где его навыки наиболее
-						востребованы: РЭБ, артиллерия, ВДВ, Африканский корпус, ракетные
-						войска, морская пехота, мотострелковые части, водители категорий
-						C/D/E, операторы БПЛА и другие направления
+						{finalText}
 					</p>
+
 					<div>
 						<p className='text-[16px] lg:text-[21px] font-semibold'>
 							Кого приглашают на службу:
@@ -37,6 +49,7 @@ const Specialties = () => {
 							</li>
 						</ul>
 					</div>
+
 					<div>
 						<p className='text-[16px] lg:text-[21px] font-semibold'>
 							Что получает контрактник:
@@ -54,6 +67,7 @@ const Specialties = () => {
 							<li>Официальное оформление, сопровождение, поддержка</li>
 						</ul>
 					</div>
+
 					<div className='flex flex-col gap-2.5'>
 						<p className='text-[16px] lg:text-[21px] font-semibold'>
 							Выплаты и поддержка

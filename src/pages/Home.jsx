@@ -1,6 +1,7 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+
 import Answers from '../components/Answers/Answers'
 import Benifits from '../components/Benifits/Benifits'
 import Compensations from '../components/Compensations/Compensations'
@@ -19,26 +20,55 @@ import Specialties from '../components/Specialties/Specialties'
 import Stages from '../components/Stages/Stages'
 import Vacansies from '../components/Vacansies/Vacansies'
 
+const BRAND_SUFFIX = ' — SVO GO'
+
+const clamp = (str, max = 160) => {
+	if (!str) return ''
+	const s = String(str).replace(/\s+/g, ' ').trim()
+	return s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s
+}
+
 const Home = () => {
-	const { hash } = useLocation()
+	const location = useLocation()
+	const { hash } = location
 
 	useEffect(() => {
 		if (!hash) return
 		const el = document.querySelector(hash)
 		if (!el) return
-		// небольшой таймаут, чтобы DOM секций точно был отрендерен
 		setTimeout(() => {
 			el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 		}, 0)
 	}, [hash])
+
+	// SEO (пока статично, потом можно тоже брать из Hero как на DynamicPage)
+	const baseTitle = 'Название сайта — Главная'
+	const title = `${baseTitle}${BRAND_SUFFIX}`
+
+	const description = clamp(
+		'Краткое и понятное описание главной страницы для поисковиков.'
+	)
+
+	// canonical без hash (важно!)
+	const canonicalUrl = `https://your-domain.ru${location.pathname}`
+
 	return (
 		<>
 			<Helmet>
-				<title>Название сайта — Главная</title>
-				<meta
-					name='description'
-					content='Краткое и понятное описание главной страницы для поисковиков.'
-				/>
+				{/* BASIC SEO */}
+				<title>{title}</title>
+				{description && <meta name='description' content={description} />}
+
+				{/* CANONICAL */}
+				<link rel='canonical' href={canonicalUrl} />
+
+				{/* OPEN GRAPH */}
+				<meta property='og:type' content='website' />
+				<meta property='og:title' content={title} />
+				{description && (
+					<meta property='og:description' content={description} />
+				)}
+				<meta property='og:url' content={canonicalUrl} />
 			</Helmet>
 
 			<div className='min-h-screen flex flex-col w-full max-w-300 min-[1200px]:mx-auto '>
