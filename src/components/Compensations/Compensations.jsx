@@ -91,9 +91,9 @@ const Compensations = () => {
 				max-[425px]:h-auto'
 			>
 				<div className='w-full max-w-[405px] max-[766px]:max-w-none  md:max-w-none'>
-					<h3 className='w-full max-w-[365px] max-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] lg:pb-2.5 lg:text-[30px] xl:text-[40px] px-5 md:max-w-none'>
+					<h2 className='w-full max-w-[365px] max-[766px]:max-w-none font-inter font-semibold text-[20px] md:text-[24px] lg:pb-2.5 lg:text-[30px] xl:text-[40px] px-5 md:max-w-none'>
 						Выплаты и компенсации по контракту СВО в 2025 году
-					</h3>
+					</h2>
 				</div>
 
 				<div className='w-full'>

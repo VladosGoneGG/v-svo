@@ -45,6 +45,9 @@ const Popup = ({ onSuccess }) => {
 			<div className='w-full  md:flex md:justify-end'>
 				<form onSubmit={handleSubmit(onSubmit)} className='w-full'>
 					<div className='flex flex-col justify-center gap-[15px]'>
+						<label htmlFor='popup-name' className='sr-only'>
+							Ваше имя
+						</label>
 						<input
 							type='text'
 							placeholder='Ваше имя'
@@ -63,7 +66,9 @@ const Popup = ({ onSuccess }) => {
 								{errors.name.message}
 							</p>
 						) : null}
-
+						<label htmlFor='popup-phone' className='sr-only'>
+							Телефон
+						</label>
 						<input
 							type='tel'
 							placeholder='+7 (000) 000-00-00'

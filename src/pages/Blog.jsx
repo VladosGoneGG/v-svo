@@ -1,5 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import { useLocation } from 'react-router-dom'
+import { SITE_CONFIG } from '../config/site'
 
 import Answers from '../components/Answers/Answers'
 import Blogsection from '../components/Blogsection/Blogsection'
@@ -9,8 +10,6 @@ import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Requirements from '../components/Requirements/Requirements'
 import { useBlogPage } from '../hooks/useBlogPage'
-
-const BRAND_SUFFIX = ' — SVO GO'
 
 const clamp = (str, max = 160) => {
 	if (!str) return ''
@@ -22,10 +21,8 @@ const Blog = () => {
 	const { data } = useBlogPage()
 	const location = useLocation()
 
-	// SEO fallback
 	const baseTitle = data?.seo?.title || 'Блог'
-
-	const title = `${baseTitle}${BRAND_SUFFIX}`
+	const title = `${baseTitle}${SITE_CONFIG.brandSuffix ?? ''}`.trim()
 
 	const baseDescription =
 		data?.seo?.description ||
@@ -34,14 +31,80 @@ const Blog = () => {
 
 	const description = clamp(baseDescription)
 
-	const canonicalUrl = `https://your-domain.ru${location.pathname}`
+	const canonicalUrl = `${SITE_CONFIG.domain}${location.pathname}`
+
+	// --- schema.org (JSON-LD) ---
+	const schemaOrgJson = {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'Organization',
+				'@id': `${SITE_CONFIG.domain}#organization`,
+				name: SITE_CONFIG.organizationName || SITE_CONFIG.brandName,
+				url: SITE_CONFIG.domain,
+				logo: SITE_CONFIG.logoUrl,
+				sameAs: Array.isArray(SITE_CONFIG.sameAs) ? SITE_CONFIG.sameAs : [],
+			},
+			{
+				'@type': 'WebSite',
+				'@id': `${SITE_CONFIG.domain}#website`,
+				url: SITE_CONFIG.domain,
+				name: SITE_CONFIG.brandName,
+				publisher: { '@id': `${SITE_CONFIG.domain}#organization` },
+				inLanguage: 'ru-RU',
+			},
+			{
+				'@type': 'BreadcrumbList',
+				'@id': `${canonicalUrl}#breadcrumbs`,
+				itemListElement: [
+					{
+						'@type': 'ListItem',
+						position: 1,
+						name: 'Главная',
+						item: SITE_CONFIG.domain,
+					},
+					{
+						'@type': 'ListItem',
+						position: 2,
+						name: 'Блог',
+						item: canonicalUrl,
+					},
+				],
+			},
+			{
+				// Blog как страница со статьями
+				'@type': 'Blog',
+				'@id': `${canonicalUrl}#blog`,
+				url: canonicalUrl,
+				name: title,
+				description: description || undefined,
+				isPartOf: { '@id': `${SITE_CONFIG.domain}#website` },
+				publisher: { '@id': `${SITE_CONFIG.domain}#organization` },
+				inLanguage: 'ru-RU',
+			},
+			{
+				'@type': 'WebPage',
+				'@id': `${canonicalUrl}#webpage`,
+				url: canonicalUrl,
+				name: title,
+				description: description || undefined,
+				isPartOf: { '@id': `${SITE_CONFIG.domain}#website` },
+				about: { '@id': `${SITE_CONFIG.domain}#organization` },
+				breadcrumb: { '@id': `${canonicalUrl}#breadcrumbs` },
+				inLanguage: 'ru-RU',
+				primaryImageOfPage: SITE_CONFIG.logoUrl
+					? { '@type': 'ImageObject', url: SITE_CONFIG.logoUrl }
+					: undefined,
+			},
+		],
+	}
 
 	return (
 		<>
 			<Helmet>
 				{/* BASIC SEO */}
 				<title>{title}</title>
-				{description && <meta name='description' content={description} />}
+				{description ? <meta name='description' content={description} /> : null}
 
 				{/* CANONICAL */}
 				<link rel='canonical' href={canonicalUrl} />
@@ -49,10 +112,17 @@ const Blog = () => {
 				{/* OPEN GRAPH */}
 				<meta property='og:type' content='website' />
 				<meta property='og:title' content={title} />
-				{description && (
+				{description ? (
 					<meta property='og:description' content={description} />
-				)}
+				) : null}
 				<meta property='og:url' content={canonicalUrl} />
+				<meta property='og:site_name' content={SITE_CONFIG.brandName} />
+				<meta property='og:locale' content={SITE_CONFIG.locale || 'ru_RU'} />
+
+				{/* schema.org JSON-LD */}
+				<script type='application/ld+json'>
+					{JSON.stringify(schemaOrgJson)}
+				</script>
 			</Helmet>
 
 			<div className='min-h-screen flex flex-col w-full max-w-300 min-[1200px]:mx-auto '>
@@ -61,7 +131,7 @@ const Blog = () => {
 				<main className='flex-1 mt-2.5'>
 					<Hero />
 
-					{data && (
+					{data ? (
 						<>
 							<Blogsection data={data.block1} />
 							<Blogsection data={data.post1} bgClassName='bg-[#F9F9F9]' />
@@ -78,7 +148,7 @@ const Blog = () => {
 
 							<Consultation />
 						</>
-					)}
+					) : null}
 				</main>
 
 				<Footer />

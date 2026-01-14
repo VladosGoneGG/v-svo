@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Telega from '../../assets/images/telegrami.png'
 import Logo from '../../assets/svg/Logo.svg?react'
 import { useFooterLinks } from '../../hooks/useFooterLinks'
@@ -14,12 +14,28 @@ const Footer = () => {
 	const callPopup = usePopupFlow()
 	const scrollNav = useScrollNav()
 	const goHome = useGoHome()
+	const location = useLocation()
 
 	const { data } = useFooterLinks()
 
 	const specAndProf = data?.specAndProf ?? []
 	const units = data?.units ?? []
 	const cities = data?.cities ?? []
+
+	// делает "нормальный" href для якорей, чтобы боты видели ссылки
+	const toHashHref = hash => `/${hash}` // '#payments' -> '/#payments'
+
+	// универсальный обработчик для пунктов меню-якорей
+	const onHashClick = (e, hash) => {
+		// Если уже на главной — делаем smooth-scroll (JS)
+		if (location.pathname === '/') {
+			e.preventDefault()
+			scrollNav(hash)
+			return
+		}
+		// Если НЕ на главной — НЕ блокируем ссылку:
+		// браузер сам перейдёт на "/#секция"
+	}
 
 	return (
 		<footer className='relative w-full'>
@@ -142,7 +158,7 @@ const Footer = () => {
 								</ul>
 							</div>
 
-							{/* Меню — оставляем твою логику */}
+							{/* Меню — FIX для Lighthouse: у <a> есть href */}
 							<div>
 								<h4 className='font-inter font-semibold text-[14px] min-[569px]:text-[18px] mb-2'>
 									Меню
@@ -151,6 +167,7 @@ const Footer = () => {
 								<ul className='flex flex-col gap-1.5 font-golos font-medium text-[12px] min-[569px]:text-[14px] '>
 									<li>
 										<a
+											href='/'
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
 											onClick={e => {
 												e.preventDefault()
@@ -163,11 +180,9 @@ const Footer = () => {
 
 									<li>
 										<a
+											href={toHashHref('#payments')}
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
-											onClick={e => {
-												e.preventDefault()
-												scrollNav('#payments')
-											}}
+											onClick={e => onHashClick(e, '#payments')}
 										>
 											Выплаты
 										</a>
@@ -175,11 +190,9 @@ const Footer = () => {
 
 									<li>
 										<a
+											href={toHashHref('#benefits')}
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
-											onClick={e => {
-												e.preventDefault()
-												scrollNav('#benefits')
-											}}
+											onClick={e => onHashClick(e, '#benefits')}
 										>
 											Льготы
 										</a>
@@ -187,11 +200,9 @@ const Footer = () => {
 
 									<li>
 										<a
+											href={toHashHref('#requirements')}
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
-											onClick={e => {
-												e.preventDefault()
-												scrollNav('#requirements')
-											}}
+											onClick={e => onHashClick(e, '#requirements')}
 										>
 											Требования
 										</a>
@@ -199,11 +210,9 @@ const Footer = () => {
 
 									<li>
 										<a
+											href={toHashHref('#documents')}
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
-											onClick={e => {
-												e.preventDefault()
-												scrollNav('#documents')
-											}}
+											onClick={e => onHashClick(e, '#documents')}
 										>
 											Документы
 										</a>
@@ -211,11 +220,9 @@ const Footer = () => {
 
 									<li>
 										<a
+											href={toHashHref('#foreigners')}
 											className='cursor-pointer hover:text-contrast active:text-contrast/70'
-											onClick={e => {
-												e.preventDefault()
-												scrollNav('#foreigners')
-											}}
+											onClick={e => onHashClick(e, '#foreigners')}
 										>
 											Мигрантам
 										</a>

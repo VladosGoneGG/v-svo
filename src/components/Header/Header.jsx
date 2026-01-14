@@ -14,6 +14,8 @@ const Header = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
 
+	const toHashHref = hash => `/${hash}`
+
 	const handleNavClick = useCallback(
 		hash => {
 			// если мы не на главной — сначала переходим на неё с hash
@@ -59,17 +61,24 @@ const Header = () => {
       '
 		>
 			<div className=' flex items-center justify-between p-2.5 min-[960px]:p-5'>
-				<Link to='/'>
+				<Link to='/' aria-label='На главную'>
 					<Logo />
 				</Link>
 
 				<ul className='hidden font-golos font-medium text-[14px] w-123.25 h-6.75 min-[960px]:flex items-center justify-between min-[1200px]:text-[16px] min-[1200px]:w-137.75 min-[1200px]:h-7.25 '>
 					<li>
 						<a
+							href={toHashHref('#payments')}
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
 							onClick={e => {
-								e.preventDefault()
-								handleNavClick('#payments')
+								// smooth-scroll только если мы УЖЕ на главной
+								if (location.pathname === '/') {
+									e.preventDefault()
+									handleNavClick('#payments')
+								} else {
+									// не preventDefault: пусть сработает обычная навигация по href="/#payments"
+									setIsBurgerOpen(false)
+								}
 							}}
 						>
 							Выплаты
@@ -77,10 +86,17 @@ const Header = () => {
 					</li>
 					<li>
 						<a
+							href={toHashHref('#benefits')}
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
 							onClick={e => {
-								e.preventDefault()
-								handleNavClick('#benefits')
+								// smooth-scroll только если мы УЖЕ на главной
+								if (location.pathname === '/') {
+									e.preventDefault()
+									handleNavClick('#benefits')
+								} else {
+									// не preventDefault: пусть сработает обычная навигация по href="/#payments"
+									setIsBurgerOpen(false)
+								}
 							}}
 						>
 							Льготы
@@ -88,10 +104,17 @@ const Header = () => {
 					</li>
 					<li>
 						<a
+							href={toHashHref('#requirements')}
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
 							onClick={e => {
-								e.preventDefault()
-								handleNavClick('#requirements')
+								// smooth-scroll только если мы УЖЕ на главной
+								if (location.pathname === '/') {
+									e.preventDefault()
+									handleNavClick('#requirements')
+								} else {
+									// не preventDefault: пусть сработает обычная навигация по href="/#payments"
+									setIsBurgerOpen(false)
+								}
 							}}
 						>
 							Требования
@@ -99,10 +122,17 @@ const Header = () => {
 					</li>
 					<li>
 						<a
+							href={toHashHref('#documents')}
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
 							onClick={e => {
-								e.preventDefault()
-								handleNavClick('#documents')
+								// smooth-scroll только если мы УЖЕ на главной
+								if (location.pathname === '/') {
+									e.preventDefault()
+									handleNavClick('#documents')
+								} else {
+									// не preventDefault: пусть сработает обычная навигация по href="/#payments"
+									setIsBurgerOpen(false)
+								}
 							}}
 						>
 							Документы
@@ -110,15 +140,23 @@ const Header = () => {
 					</li>
 					<li>
 						<a
+							href={toHashHref('#specializations')}
 							className='cursor-pointer hover:text-contrast active:text-contrast/70'
 							onClick={e => {
-								e.preventDefault()
-								handleNavClick('#specializations')
+								// smooth-scroll только если мы УЖЕ на главной
+								if (location.pathname === '/') {
+									e.preventDefault()
+									handleNavClick('#specializations')
+								} else {
+									// не preventDefault: пусть сработает обычная навигация по href="/#payments"
+									setIsBurgerOpen(false)
+								}
 							}}
 						>
 							Специализации
 						</a>
 					</li>
+
 					<li>
 						<Link
 							to='/blog'
@@ -138,7 +176,7 @@ const Header = () => {
 						>
 							+7(999)8887766
 						</a>
-						<a href='/'>
+						<a href='/' aria-label='Telegram'>
 							<Tg className='cursor-pointer hover:opacity-90 active:opacity-70' />
 						</a>
 					</div>

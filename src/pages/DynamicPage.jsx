@@ -1,5 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import { useLocation, useParams } from 'react-router-dom'
+import { SITE_CONFIG } from '../config/site'
 
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
@@ -22,8 +23,6 @@ import Vacansies from '../components/Vacansies/Vacansies'
 
 import { useDynamicPage } from '../hooks/useDynamicPage'
 
-const BRAND_SUFFIX = ' — SVO GO'
-
 const clamp = (str, max = 160) => {
 	if (!str) return ''
 	const s = String(str).replace(/\s+/g, ' ').trim()
@@ -38,12 +37,10 @@ const firstTextLine = hero => {
 }
 
 const DynamicPage = ({ pageType }) => {
-	// ✅ все хуки ДО любых return (иначе будет ошибка порядка хуков)
+	// ✅ все хуки ДО return
 	const { slug } = useParams()
 	const location = useLocation()
 	const { data, isLoading, isError, error } = useDynamicPage(pageType, slug)
-
-	if (isLoading) return <div className='p-5'>Загрузка…</div>
 
 	if (isError) {
 		const is404 = error?.status === 404
@@ -56,15 +53,90 @@ const DynamicPage = ({ pageType }) => {
 
 	// TITLE priority: seo.title -> meta.name -> hero.title
 	const baseTitle = data?.seo?.title || meta.name || hero.title || 'Страница'
-	const title = `${baseTitle}${BRAND_SUFFIX}`
+	const title = `${baseTitle}${SITE_CONFIG.brandSuffix ?? ''}`.trim()
 
 	// DESCRIPTION priority: seo.description -> hero.subtitle -> first hero text
 	const baseDescription =
 		data?.seo?.description || hero.subtitle || firstTextLine(hero)
 	const description = clamp(baseDescription)
 
-	// canonical (важно: без hash/query)
-	const canonicalUrl = `https://your-domain.ru${location.pathname}`
+	// canonical
+	const canonicalUrl = `${SITE_CONFIG.domain}${location.pathname}`
+
+	// --- schema.org (JSON-LD) ---
+	// (1) WebPage + BreadcrumbList
+	// (2) Organization referenced from config (как на Home)
+	const prettyType = (() => {
+		switch (pageType) {
+			case 'city':
+				return 'Город'
+			case 'specialization':
+				return 'Специализация'
+			case 'profession':
+				return 'Профессия'
+			case 'unit':
+				return 'Войска'
+			default:
+				return 'Страница'
+		}
+	})()
+
+	const schemaOrgJson = {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'Organization',
+				'@id': `${SITE_CONFIG.domain}#organization`,
+				name: SITE_CONFIG.organizationName || SITE_CONFIG.brandName,
+				url: SITE_CONFIG.domain,
+				logo: SITE_CONFIG.logoUrl,
+				sameAs: Array.isArray(SITE_CONFIG.sameAs) ? SITE_CONFIG.sameAs : [],
+			},
+			{
+				'@type': 'WebSite',
+				'@id': `${SITE_CONFIG.domain}#website`,
+				url: SITE_CONFIG.domain,
+				name: SITE_CONFIG.brandName,
+				publisher: { '@id': `${SITE_CONFIG.domain}#organization` },
+				inLanguage: 'ru-RU',
+			},
+			{
+				'@type': 'BreadcrumbList',
+				'@id': `${canonicalUrl}#breadcrumbs`,
+				itemListElement: [
+					{
+						'@type': 'ListItem',
+						position: 1,
+						name: 'Главная',
+						item: SITE_CONFIG.domain,
+					},
+					{
+						'@type': 'ListItem',
+						position: 2,
+						name: prettyType,
+						item: `${SITE_CONFIG.domain}/${pageType}`,
+					},
+					{
+						'@type': 'ListItem',
+						position: 3,
+						name: baseTitle,
+						item: canonicalUrl,
+					},
+				],
+			},
+			{
+				'@type': 'WebPage',
+				'@id': `${canonicalUrl}#webpage`,
+				url: canonicalUrl,
+				name: title,
+				description: description || undefined,
+				isPartOf: { '@id': `${SITE_CONFIG.domain}#website` },
+				about: { '@id': `${SITE_CONFIG.domain}#organization` },
+				breadcrumb: { '@id': `${canonicalUrl}#breadcrumbs` },
+				inLanguage: 'ru-RU',
+			},
+		],
+	}
 
 	return (
 		<>
@@ -83,6 +155,13 @@ const DynamicPage = ({ pageType }) => {
 					<meta property='og:description' content={description} />
 				) : null}
 				<meta property='og:url' content={canonicalUrl} />
+				<meta property='og:site_name' content={SITE_CONFIG.brandName} />
+				<meta property='og:locale' content={SITE_CONFIG.locale || 'ru_RU'} />
+
+				{/* schema.org JSON-LD */}
+				<script type='application/ld+json'>
+					{JSON.stringify(schemaOrgJson)}
+				</script>
 			</Helmet>
 
 			<div className='min-h-screen flex flex-col w-full max-w-300 min-[1200px]:mx-auto'>

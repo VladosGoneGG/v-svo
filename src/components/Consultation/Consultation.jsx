@@ -133,6 +133,9 @@ const Consultation = () => {
 								className='w-full md:max-w-[460px] md:pt-[45px]'
 							>
 								<div className='flex flex-col'>
+									<label htmlFor='consultation-name' className='sr-only'>
+										Ваше имя
+									</label>
 									<input
 										type='text'
 										placeholder='Ваше имя'
@@ -151,7 +154,9 @@ const Consultation = () => {
 											{errors.name.message}
 										</p>
 									) : null}
-
+									<label htmlFor='consultation-phone' className='sr-only'>
+										Телефон
+									</label>
 									<input
 										type='tel'
 										placeholder='+7 (000) 000-00-00'
@@ -191,6 +196,9 @@ const Consultation = () => {
 												agreeField.onChange(!agreeField.value)
 											}}
 										>
+											<label htmlFor='checkbox-agreed' className='sr-only'>
+												Я принимаю Условия передачи информации
+											</label>
 											<input
 												type='checkbox'
 												className='peer sr-only'
