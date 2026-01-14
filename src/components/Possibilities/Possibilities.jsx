@@ -100,7 +100,7 @@ const Possibilities = () => {
 				</div>
 
 				{/* НИЗ: статистика */}
-				<div className='mt-5 bg-white rounded-[20px] p-5 shadow-item'>
+				<div className='mt-5 lg:mt-10 bg-white rounded-[20px] p-5 shadow-item'>
 					<ul
 						className='
 							grid grid-cols-1

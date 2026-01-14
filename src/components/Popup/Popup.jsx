@@ -88,19 +88,16 @@ const Popup = ({ onSuccess }) => {
 							</p>
 						) : null}
 
-						<button
+						<motion.button
 							type='submit'
-							className='
-                mt-2 w-full h-[49px] rounded-[15px] cursor-pointer
-                bg-contrast/90 hover:bg-contrast active:bg-contrast/70 shadow-item text-white
-                font-inter font-bold
-                text-[18px]
-                uppercase
-                active:scale-[0.99]
-              '
+							className=' mt-2 w-full h-[49px] rounded-[15px] cursor-pointer
+    bg-contrast/90 hover:bg-contrast active:bg-contrast/70 shadow-item text-white font-inter font-bold text-[18px] uppercase active:scale-[0.99]
+    transition-colors duration-150 ease-in-out'
+							whileTap={{ scale: 0.97, y: 1 }}
+							transition={{ duration: 0.15, ease: 'easeInOut' }}
 						>
 							получить консультацию
-						</button>
+						</motion.button>
 
 						<motion.div
 							className='h-5  pl-[8px] inline-flex justify-center items-center gap-2.5 select-none'

@@ -228,19 +228,14 @@ const Consultation = () => {
 										</a>
 									</motion.div>
 
-									<button
+									<motion.button
 										type='submit'
-										className='
-                      mt-2 w-full h-[62px] mt-5 rounded-[15px] cursor-pointer
-                      bg-contrast/90 hover:bg-contrast active:bg-contrast/70 shadow-item text-white
-                      py-4 font-inter font-bold
-                      text-[18px]
-                      uppercase
-                      active:scale-[0.99]
-                    '
+										className='  mt-2 w-full h-[62px] mt-5 rounded-[15px] cursor-pointer  bg-contrast/90 hover:bg-contrast active:bg-contrast/70 shadow-item text-white  py-4 font-inter font-bold text-[18px] uppercase active:scale-[0.99] transition-colors duration-150 ease-in-out '
+										whileTap={{ scale: 0.97, y: 1 }}
+										transition={{ duration: 0.15, ease: 'easeInOut' }}
 									>
 										получить консультацию
-									</button>
+									</motion.button>
 
 									<p className='mt-5 px-2.5 font-inter font-semibold text-[14px] text-[#797c85] text-left'>
 										Консультация бесплатная. Звонок не обязывает вас подписывать

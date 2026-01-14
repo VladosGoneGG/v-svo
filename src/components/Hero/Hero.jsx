@@ -66,7 +66,8 @@ const Hero = ({ title, subtitle, text }) => {
 								))}
 							</div>
 
-							<button
+							<motion.button
+								type='button'
 								onClick={popup.open}
 								className={[
 									'w-full',
@@ -74,14 +75,18 @@ const Hero = ({ title, subtitle, text }) => {
 									'h-[37px] md:h-[62px]',
 									'rounded-[10px]',
 									'bg-contrast/90 shadow-btn hover:bg-contrast active:bg-contrast/70',
+									'transition-colors duration-150 ease-in-out',
 									'text-[14px] md:text-[18px] font-inter font-semibold',
 									'cursor-pointer',
 									'mt-[clamp(20px,1.2vw,14px)] min-[960px]:mt-[50px]',
 									'px-4 sm:px-6 xl:mt-[20px]',
 								].join(' ')}
+								// "Smart animate" press
+								whileTap={{ scale: 0.97 }}
+								transition={{ duration: 0.15, ease: 'easeInOut' }}
 							>
 								Записаться на оформление контракта
-							</button>
+							</motion.button>
 						</div>
 					</div>
 				</div>

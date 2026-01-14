@@ -1,10 +1,10 @@
+import { motion } from 'motion/react'
 import Gerb from '../../assets/images/gerb.png'
 import { usePopupFlow } from '../../hooks/usePopupFlow'
 import Fullbleed from '../Fullbleed/Fullbleed'
 import Modal from '../Modal/Modal'
 import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
-
 const DEFAULT_INTRO_TEXT =
 	'Мы заранее проверим вашу годность, условия ВВК и подскажем, какие документы нужны для допуска к контракту. Консультация бесплатная'
 
@@ -54,13 +54,15 @@ const Requirements = ({ introText }) => {
 							</div>
 						</div>
 
-						<button
+						<motion.button
 							type='button'
 							onClick={popup.open}
-							className='w-full md:max-w-[350px] xl:max-w-[310px] h-[62px] flex items-center justify-center px-7.5 bg-contrast/90 hover:bg-contrast active:bg-contrast/70 text-white shadow-btn rounded-[15px] font-inter font-semibold text-[18px] cursor-pointer xl:ml-auto'
+							className='w-full md:max-w-[350px] xl:max-w-[310px] h-[62px] flex items-center justify-center px-7.5 bg-contrast/90 hover:bg-contrast active:bg-contrast/70 text-white shadow-btn rounded-[15px] font-inter font-semibold text-[18px] cursor-pointer xl:ml-auto transition-colors duration-150 ease-in-out'
+							whileTap={{ scale: 0.97, y: 1 }}
+							transition={{ duration: 0.15, ease: 'easeInOut' }}
 						>
 							Задать вопрос
-						</button>
+						</motion.button>
 					</div>
 				</div>
 

@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { Link, useLocation } from 'react-router-dom'
 import Telega from '../../assets/images/telegrami.png'
 import Logo from '../../assets/svg/Logo.svg?react'
@@ -5,7 +6,6 @@ import { useFooterLinks } from '../../hooks/useFooterLinks'
 import { useGoHome } from '../../hooks/useGoHome'
 import { usePopupFlow } from '../../hooks/usePopupFlow'
 import { useScrollNav } from '../../hooks/useScrollNav'
-
 import Modal from '../Modal/Modal'
 import Popup from '../Popup/Popup'
 import Popupok from '../Popupok/Popupok'
@@ -65,7 +65,7 @@ const Footer = () => {
 						<div className='flex items-center gap-2.5'>
 							<a
 								href='tel:+79998887766'
-								className='font-golos font-medium text-[14px]'
+								className='font-golos font-medium text-[14px] hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							>
 								+7(999)8887766
 							</a>
@@ -78,13 +78,15 @@ const Footer = () => {
 							</a>
 						</div>
 
-						<button
+						<motion.button
 							type='button'
 							onClick={callPopup.open}
-							className='w-full max-w-[250px] h-[49px] rounded-[10px] text-white bg-contrast/90 hover:bg-contrast active:bg-contrast/70 font-inter font-bold text-[18px] cursor-pointer shadow-btn'
+							className='w-full max-w-[250px] h-[49px] rounded-[10px] text-white bg-contrast/90 hover:bg-contrast active:bg-contrast/70 font-inter font-bold text-[18px] cursor-pointer shadow-btn transition-colors duration-150 ease-in-out'
+							whileTap={{ scale: 0.97, y: 1 }}
+							transition={{ duration: 0.15, ease: 'easeInOut' }}
 						>
 							Обратный звонок
-						</button>
+						</motion.button>
 					</div>
 
 					<div className='w-full min-w-0 flex justify-start min-[426px]:justify-center'>
@@ -106,7 +108,7 @@ const Footer = () => {
 											<li key={`${item.type}-${item.slug}`}>
 												<Link
 													to={to}
-													className='cursor-pointer hover:text-contrast active:text-contrast/70'
+													className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 												>
 													{item.label}
 												</Link>
@@ -127,7 +129,7 @@ const Footer = () => {
 										<li key={`unit-${item.slug}`}>
 											<Link
 												to={`/unit/${item.slug}`}
-												className='cursor-pointer hover:text-contrast active:text-contrast/70'
+												className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											>
 												{item.label}
 											</Link>
@@ -149,7 +151,7 @@ const Footer = () => {
 										<li key={`city-${item.slug}`}>
 											<Link
 												to={`/city/${item.slug}`}
-												className='cursor-pointer hover:text-contrast active:text-contrast/70'
+												className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											>
 												{item.label}
 											</Link>
@@ -168,7 +170,7 @@ const Footer = () => {
 									<li>
 										<a
 											href='/'
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											onClick={e => {
 												e.preventDefault()
 												goHome()
@@ -181,7 +183,7 @@ const Footer = () => {
 									<li>
 										<a
 											href={toHashHref('#payments')}
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											onClick={e => onHashClick(e, '#payments')}
 										>
 											Выплаты
@@ -191,7 +193,7 @@ const Footer = () => {
 									<li>
 										<a
 											href={toHashHref('#benefits')}
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											onClick={e => onHashClick(e, '#benefits')}
 										>
 											Льготы
@@ -201,7 +203,7 @@ const Footer = () => {
 									<li>
 										<a
 											href={toHashHref('#requirements')}
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											onClick={e => onHashClick(e, '#requirements')}
 										>
 											Требования
@@ -211,7 +213,7 @@ const Footer = () => {
 									<li>
 										<a
 											href={toHashHref('#documents')}
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											onClick={e => onHashClick(e, '#documents')}
 										>
 											Документы
@@ -221,7 +223,7 @@ const Footer = () => {
 									<li>
 										<a
 											href={toHashHref('#foreigners')}
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 											onClick={e => onHashClick(e, '#foreigners')}
 										>
 											Мигрантам
@@ -231,13 +233,13 @@ const Footer = () => {
 									<li>
 										<Link
 											to='/blog'
-											className='cursor-pointer hover:text-contrast active:text-contrast/70'
+											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 										>
 											Блог
 										</Link>
 									</li>
 
-									<li className='cursor-pointer hover:text-contrast active:text-contrast/70'>
+									<li className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'>
 										Сотрудничество
 									</li>
 								</ul>

@@ -45,7 +45,10 @@ const NavButtons = ({
 						animate='animate'
 						exit='exit'
 						transition={{ duration: DURATION, ease: EASE }}
-						className='h-[62px] w-[78px] bg-[#6b6e76] rounded-[15px] flex items-center justify-center cursor-pointer'
+						// ✅ hover + press
+						whileHover={{ filter: 'brightness(1.08)' }}
+						whileTap={{ scale: 0.97, y: 1 }}
+						className='h-[62px] w-[78px] bg-[#6b6e76] rounded-[15px] flex items-center justify-center cursor-pointer transition duration-150 ease-in-out'
 						aria-label='Назад'
 					>
 						<span className='rotate-180'>
@@ -55,7 +58,7 @@ const NavButtons = ({
 				)}
 			</AnimatePresence>
 
-			{/* Основная кнопка: layout делает плавное сжатие/расширение */}
+			{/* Основная кнопка */}
 			<motion.button
 				layout
 				type={isContacts ? 'submit' : 'button'}
@@ -63,13 +66,16 @@ const NavButtons = ({
 				onClick={isContacts ? undefined : onNext}
 				disabled={mainDisabled}
 				transition={{ duration: DURATION, ease: EASE }}
+				// ✅ press (и hover оставляем CSS-ом, но делаем плавным)
+				whileTap={mainDisabled ? undefined : { scale: 0.97, y: 1 }}
 				className={[
 					'w-full h-[62px] bg-contrast/90 hover:bg-contrast text-white rounded-[15px]',
 					'font-inter font-semibold text-[18px]',
 					'disabled:opacity-50 flex items-center justify-center gap-5 cursor-pointer',
+					// ✅ плавный hover (как ты просил)
+					'transition-colors duration-150 ease-in-out',
 				].join(' ')}
 			>
-				{/* Плавная смена текста */}
 				<AnimatePresence mode='wait' initial={false}>
 					<motion.span
 						key={isContacts ? 'submit' : 'next'}
@@ -84,7 +90,6 @@ const NavButtons = ({
 					</motion.span>
 				</AnimatePresence>
 
-				{/* Иконка Next только на "Далее" — появление/исчезновение плавное */}
 				<AnimatePresence initial={false}>
 					{!isContacts && (
 						<motion.span

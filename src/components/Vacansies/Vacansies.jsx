@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import Fullbleed from '../Fullbleed/Fullbleed'
 import VacancyRow from '../VacancyRow/VacancyRow'
 import Parad from './../../assets/images/garant.webp'
@@ -140,19 +141,14 @@ const Vacansies = ({ leftTitle, leftText }) => {
 					</div>
 				</div>
 
-				<button
-					className='
-     w-full sm:w-[350px] h-[62px]
-    flex items-center justify-center
-    px-7.5
-    bg-contrast/90 hover:bg-contrast active:bg-contrast/70 text-white
-    shadow-btn rounded-[15px]
-    font-inter font-semibold text-[18px]
-    cursor-pointer
-  '
+				<motion.button
+					type='button'
+					className='w-full sm:w-[350px] h-[62px] flex items-center justify-center px-7.5  bg-contrast/90 hover:bg-contrast active:bg-contrast/70 text-white shadow-btn rounded-[15px] font-inter font-semibold text-[18px]  cursor-pointer transition-colors duration-150 ease-in-out '
+					whileTap={{ scale: 0.97, y: 1 }}
+					transition={{ duration: 0.15, ease: 'easeInOut' }}
 				>
 					Все вакансии на СВО
-				</button>
+				</motion.button>
 			</div>
 		</section>
 	)

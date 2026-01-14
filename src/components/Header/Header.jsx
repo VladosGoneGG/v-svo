@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Logo from '../../assets/svg/Logo.svg?react'
@@ -69,7 +70,7 @@ const Header = () => {
 					<li>
 						<a
 							href={toHashHref('#payments')}
-							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							onClick={e => {
 								// smooth-scroll только если мы УЖЕ на главной
 								if (location.pathname === '/') {
@@ -87,7 +88,7 @@ const Header = () => {
 					<li>
 						<a
 							href={toHashHref('#benefits')}
-							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							onClick={e => {
 								// smooth-scroll только если мы УЖЕ на главной
 								if (location.pathname === '/') {
@@ -105,7 +106,7 @@ const Header = () => {
 					<li>
 						<a
 							href={toHashHref('#requirements')}
-							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							onClick={e => {
 								// smooth-scroll только если мы УЖЕ на главной
 								if (location.pathname === '/') {
@@ -123,7 +124,7 @@ const Header = () => {
 					<li>
 						<a
 							href={toHashHref('#documents')}
-							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							onClick={e => {
 								// smooth-scroll только если мы УЖЕ на главной
 								if (location.pathname === '/') {
@@ -141,7 +142,7 @@ const Header = () => {
 					<li>
 						<a
 							href={toHashHref('#specializations')}
-							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							onClick={e => {
 								// smooth-scroll только если мы УЖЕ на главной
 								if (location.pathname === '/') {
@@ -160,7 +161,7 @@ const Header = () => {
 					<li>
 						<Link
 							to='/blog'
-							className='cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 							onClick={() => setIsBurgerOpen(false)}
 						>
 							Блог
@@ -172,7 +173,7 @@ const Header = () => {
 					<div className='hidden min-[426px]:flex items-center gap-2.5 mr-3.75 min-[960px]:mr-0 min-[1200px]:mr-3.75'>
 						<a
 							href='tel:+79998887766'
-							className='font-golos font-medium text-[14px] cursor-pointer hover:text-contrast active:text-contrast/70'
+							className='font-golos font-medium text-[14px] cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
 						>
 							+7(999)8887766
 						</a>
@@ -181,13 +182,15 @@ const Header = () => {
 						</a>
 					</div>
 
-					<button
+					<motion.button
 						type='button'
 						onClick={callPopup.open}
-						className='hidden w-38.5 h-9.25 bg-contrast/90 hover:bg-contrast active:bg-contrast/70 font-inter text-[14px] font-semibold text-white shadow-btn rounded-[10px] min-[1200px]:flex items-center justify-center cursor-pointer'
+						className='hidden w-38.5 h-9.25 bg-contrast/90 hover:bg-contrast active:bg-contrast/70 font-inter text-[14px] font-semibold text-white shadow-btn rounded-[10px] min-[1200px]:flex items-center justify-center cursor-pointer transition-colors duration-150 ease-in-out'
+						whileTap={{ scale: 0.97, y: 1 }}
+						transition={{ duration: 0.15, ease: 'easeInOut' }}
 					>
 						Обратный звонок
-					</button>
+					</motion.button>
 
 					<button
 						type='button'

@@ -133,7 +133,7 @@ const Benifits = () => {
 								{isActive && (
 									<motion.span
 										layoutId='benefits-pill'
-										className='absolute inset-0 rounded-[10px] bg-contrast shadow-btn'
+										className='absolute inset-0 rounded-[10px] bg-contrast/90 shadow-btn hover:bg-contrast active:bg-contrast/70 transition-colors duration-150 ease-in-out'
 										transition={{
 											type: 'spring',
 											stiffness: 520,
