@@ -1,5 +1,5 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
-import { useLocation, useParams } from 'react-router-dom'
+import { Navigate, useLocation, useParams } from 'react-router-dom'
 import { SITE_CONFIG } from '../config/site'
 
 import Footer from '../components/Footer/Footer'
@@ -43,8 +43,11 @@ const DynamicPage = ({ pageType }) => {
 	const { data, isLoading, isError, error } = useDynamicPage(pageType, slug)
 
 	if (isError) {
-		const is404 = error?.status === 404
-		return <div className='p-5'>{is404 ? 'Страница не найдена' : 'Ошибка'}</div>
+		if (error?.status === 404) {
+			return <Navigate to='/' replace />
+		}
+
+		return <div className='p-5'>Ошибка загрузки страницы</div>
 	}
 
 	const meta = data?.meta ?? {}
