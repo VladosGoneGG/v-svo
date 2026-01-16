@@ -37,7 +37,6 @@ const firstTextLine = hero => {
 }
 
 const DynamicPage = ({ pageType }) => {
-	// ✅ все хуки ДО return
 	const { slug } = useParams()
 	const location = useLocation()
 	const { data, isLoading, isError, error } = useDynamicPage(pageType, slug)
