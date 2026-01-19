@@ -7,6 +7,7 @@ export function useDynamicPage(pageType, slug) {
 		queryKey: ['dynamicIndex', pageType],
 		queryFn: ({ signal }) => fetchDynamicIndex(pageType, { signal }),
 		enabled: Boolean(pageType),
+		placeholderData: prev => prev,
 	})
 
 	const data = indexQuery.data?.[slug]

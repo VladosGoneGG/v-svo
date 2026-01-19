@@ -60,9 +60,9 @@ const DEFAULT_TEXT = {
  * - leftTitle?: string
  * - leftText?: string
  */
-const Vacansies = ({ leftTitle, leftText }) => {
-	const finalLeftTitle = leftTitle ?? DEFAULT_TEXT.leftTitle
-	const finalLeftText = leftText ?? DEFAULT_TEXT.leftText
+const Vacansies = ({ title, text }) => {
+	const finalLeftTitle = title ?? DEFAULT_TEXT.leftTitle
+	const finalLeftText = text ?? DEFAULT_TEXT.leftText
 
 	return (
 		<section

@@ -9,16 +9,10 @@ const DEFAULT_TITLE = 'Требования и условия для служб�
 const DEFAULT_INTRO_TEXT =
 	'Мы заранее проверим вашу годность, условия ВВК и подскажем, какие документы нужны для допуска к контракту. Консультация бесплатная'
 
-/**
- * props (из админки):
- * - introText?: string
- */
-const Requirements = ({ title, introText }) => {
+const Requirements = ({ title, text }) => {
 	const popup = usePopupFlow()
-
 	const finalTitle = title ?? DEFAULT_TITLE
-	const finalIntroText = introText ?? DEFAULT_INTRO_TEXT
-
+	const finalText = text ?? DEFAULT_INTRO_TEXT
 	return (
 		<section
 			id='requirements'
@@ -35,7 +29,7 @@ const Requirements = ({ title, introText }) => {
 					</h2>
 
 					<p className='w-full font-golos font-normal text-[14px] md:text-[16px] lg:text-[21px] xl:max-w-[508px]'>
-						{finalIntroText}
+						{finalText}
 					</p>
 
 					<div className='w-full  flex flex-col gap-5 md:items-end'>
