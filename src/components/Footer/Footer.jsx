@@ -233,15 +233,6 @@ const Footer = () => {
 											Мигрантам
 										</a>
 									</li>
-
-									<li>
-										<Link
-											to='/blog'
-											className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
-										>
-											Блог
-										</Link>
-									</li>
 								</ul>
 							</div>
 						</div>

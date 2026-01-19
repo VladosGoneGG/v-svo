@@ -126,16 +126,6 @@ const Header = () => {
 							Специализации
 						</a>
 					</li>
-
-					<li>
-						<Link
-							to='/blog'
-							className='cursor-pointer hover:text-contrast active:text-contrast/70 transition-colors duration-150 ease-in-out'
-							onClick={() => setIsBurgerOpen(false)}
-						>
-							Блог
-						</Link>
-					</li>
 				</ul>
 
 				<div className='flex xl:gap-[50px] items-center'>

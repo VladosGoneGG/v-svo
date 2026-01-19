@@ -8,7 +8,7 @@ const OptionButton = ({ opt, checked, onPick, animateLabel = false }) => {
 		<motion.button
 			type='button'
 			onClick={() => onPick(opt.id)}
-			className='group w-full bg-[#d1d3d8] rounded-[14px] p-4 flex gap-2.5 cursor-pointer will-change-transform'
+			className='group w-full bg-[#d1d3d8] rounded-[14px] max-[426px]:p-3 p-4 flex gap-2.5 cursor-pointer will-change-transform'
 			layout
 			animate={{
 				backgroundColor: checked ? '#ffffff' : '#d1d3d8',
@@ -35,7 +35,7 @@ const OptionButton = ({ opt, checked, onPick, animateLabel = false }) => {
 			</span>
 
 			{animateLabel ? (
-				<span className='font-inter font-semibold text-[14px] text-[#1d1e21] cursor-pointer relative'>
+				<span className='font-inter font-semibold max-[426px]:text-[12px] text-[14px] text-[#1d1e21] cursor-pointer relative'>
 					<AnimatePresence mode='wait' initial={false}>
 						<motion.span
 							key={opt.label}
@@ -50,7 +50,7 @@ const OptionButton = ({ opt, checked, onPick, animateLabel = false }) => {
 					</AnimatePresence>
 				</span>
 			) : (
-				<span className='font-inter font-semibold text-[14px] text-[#1d1e21] cursor-pointer'>
+				<span className='font-inter font-semibold max-[426px]:text-[12px] text-[14px] text-[#1d1e21] cursor-pointer'>
 					{opt.label}
 				</span>
 			)}

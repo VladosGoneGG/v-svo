@@ -27,7 +27,11 @@ const QuizContent = ({
 	birthDateValidate,
 	birthDatePlacement, // 'top' | 'bottom' | 'none'
 }) => {
-	const showBirth = birthDatePlacement !== 'none'
+	// ✅ 3 шаг: поле "свой вариант" (завязано на spec)
+	const isThirdStep = currentStep?.field === 'spec'
+
+	// ✅ BirthDate показываем везде как раньше, НО НЕ на 3 шаге
+	const showBirth = birthDatePlacement !== 'none' && !isThirdStep
 	const showBirthTop = birthDatePlacement === 'top'
 	const showBirthBottom = birthDatePlacement === 'bottom'
 
@@ -52,14 +56,13 @@ const QuizContent = ({
 				<input type='hidden' {...register('interest', { required: true })} />
 				<input type='hidden' {...register('priority', { required: true })} />
 
-				{/* BirthDate TOP (не трогаю) */}
+				{/* ✅ BirthDate TOP (как было, но без перелёта и не на 3 шаге) */}
 				{showBirthTop && (
 					<motion.div layout transition={{ duration: DURATION, ease: EASE }}>
 						<AnimatePresence initial={false} mode='sync'>
 							{showBirth && (
 								<motion.div
-									key='birthdate'
-									layoutId='birthdate-field'
+									key={`birthdate-top-${currentStep.id}`}
 									layout
 									variants={appear}
 									initial='initial'
@@ -85,7 +88,6 @@ const QuizContent = ({
 					style={{ overflow: 'hidden' }}
 				>
 					{lengthChanged ? (
-						// ✅ если реально меняется количество — делаем swap (как раньше), чтобы не было бага высоты
 						<AnimatePresence initial={false} mode='wait'>
 							<motion.div
 								key={listKey}
@@ -113,11 +115,10 @@ const QuizContent = ({
 							</motion.div>
 						</AnimatePresence>
 					) : (
-						// ✅ если количество то же — НЕ ремоунтим кнопки, чтобы кружки не мигали
 						<motion.div className='flex flex-col gap-2.5'>
 							{currentStep.options.map((opt, idx) => (
 								<motion.div
-									key={idx} // 👈 важно: сохраняем “те же” элементы по позициям
+									key={idx}
 									layout='position'
 									transition={{ duration: DURATION, ease: EASE }}
 									style={{ willChange: 'transform' }}
@@ -126,7 +127,7 @@ const QuizContent = ({
 										opt={opt}
 										checked={pickedValue === opt.id}
 										onPick={onPick}
-										animateLabel // 👈 включаем плавную смену текста
+										animateLabel
 									/>
 								</motion.div>
 							))}
@@ -134,14 +135,53 @@ const QuizContent = ({
 					)}
 				</motion.div>
 
-				{/* BirthDate BOTTOM (не трогаю) */}
+				{/* ✅ На 3 шаге — поле "Свой вариант" (вместо даты) */}
+				{isThirdStep && (
+					<motion.div
+						layout
+						variants={appear}
+						initial='initial'
+						animate='animate'
+						exit='exit'
+						transition={{ duration: DURATION, ease: EASE }}
+					>
+						<input
+							{...register('customSpec', {
+								validate: v => {
+									if (pickedValue !== 'custom') return true
+
+									if (!v || v.trim().length === 0) return 'Введите свой вариант'
+									if (v.trim().length < 2) return 'Слишком коротко'
+									return true
+								},
+							})}
+							placeholder='Свой вариант'
+							className='w-full max-[426px]:h-[44px] h-[55px] rounded-[10px] px-4 bg-white text-black outline-none'
+							onChange={e => {
+								const v = e.target.value
+
+								if (v && v.trim().length > 0) {
+									onPick({ id: 'custom' })
+								} else {
+									onPick(null)
+								}
+							}}
+						/>
+						{errors?.customSpec && (
+							<p className='text-red-400 max-[426px]:text-[12px] text-[14px] leading-tight mt-1'>
+								{errors.customSpec.message}
+							</p>
+						)}
+					</motion.div>
+				)}
+
+				{/* ✅ BirthDate BOTTOM (как было, но без перелёта и не на 3 шаге) */}
 				{showBirthBottom && (
 					<motion.div layout transition={{ duration: DURATION, ease: EASE }}>
 						<AnimatePresence initial={false} mode='sync'>
 							{showBirth && (
 								<motion.div
-									key='birthdate'
-									layoutId='birthdate-field'
+									key={`birthdate-bottom-${currentStep.id}`}
 									layout
 									variants={appear}
 									initial='initial'

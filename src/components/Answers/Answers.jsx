@@ -37,6 +37,7 @@ const Answers = () => {
 			birthDate: '',
 			health: '',
 			spec: '',
+			customSpec: '',
 			interest: '',
 			priority: '',
 			name: '',
@@ -72,6 +73,7 @@ const Answers = () => {
 	const name = watch('name')
 	const phone = watch('phone')
 	const agree = watch('agree')
+	const customSpec = watch('customSpec')
 	const pickedValue = watch(currentStep?.field || '')
 
 	const EASE = [0.42, 0, 0.58, 1]
@@ -84,9 +86,12 @@ const Answers = () => {
 			return Boolean(pickedValue) && isValidBirthDate(birthDate)
 		}
 
-		return Boolean(pickedValue)
-	}, [currentStep, birthDate, pickedValue])
+		if (currentStep.field === 'spec' && pickedValue === 'custom') {
+			return Boolean((customSpec || '').trim())
+		}
 
+		return Boolean(pickedValue)
+	}, [currentStep, birthDate, pickedValue, customSpec])
 	const canSubmit = useMemo(() => {
 		return (
 			Boolean((name || '').trim()) && isValidRuPhone(phone) && Boolean(agree)
@@ -136,19 +141,39 @@ const Answers = () => {
 		await trigger('agree')
 	}
 
-	// ✅ сабмит контактов (и всего квиза) -> Telegram (временно с фронта)
 	const onSubmit = async raw => {
 		const now = Date.now()
 		if (now - lastSentAtRef.current < 15000) return
 		if (isSending) return
 
+		const customSpec = (raw.customSpec || '').trim()
+		const hasCustomSpec = customSpec.length > 0
+
+		const specForSend =
+			raw.spec === 'custom' || hasCustomSpec
+				? customSpec
+				: optionsLabelMap.spec?.[raw.spec] || raw.spec
+
 		const payload = {
 			...raw,
+
 			military: optionsLabelMap.military?.[raw.military] || raw.military,
 			health: optionsLabelMap.health?.[raw.health] || raw.health,
-			spec: optionsLabelMap.spec?.[raw.spec] || raw.spec,
+
+			// ✅ вот тут главное
+			spec: specForSend,
+
 			interest: optionsLabelMap.interest?.[raw.interest] || raw.interest,
 			priority: optionsLabelMap.priority?.[raw.priority] || raw.priority,
+
+			// опционально: чтобы в ТГ было видно, что было выбрано из списка
+			specSelected:
+				raw.spec === 'custom'
+					? 'Свой вариант'
+					: optionsLabelMap.spec?.[raw.spec] || raw.spec,
+
+			// опционально: отправлять кастом отдельным полем (если бэку надо)
+			// customSpec: hasCustomSpec ? customSpec : '',
 		}
 
 		setIsSending(true)
@@ -159,12 +184,9 @@ const Answers = () => {
 				body: JSON.stringify(payload),
 			})
 
-			if (!res.ok) {
-				return
-			}
+			if (!res.ok) return
 
 			lastSentAtRef.current = now
-
 			okPopup.open()
 			okPopup.success()
 

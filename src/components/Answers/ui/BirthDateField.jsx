@@ -109,7 +109,7 @@ const BirthDateField = ({ register, error }) => {
 			inputMode='numeric'
 			maxLength={10}
 			className={[
-				'w-full h-[54px] rounded-[14px] px-4 bg-white font-inter font-semibold text-[14px] outline-none cursor-pointer placeholder:opacity-100 transition-[color,opacity] duration-150 hover:placeholder:opacity-50',
+				'w-full max-[426px]:h-[44px] h-[54px] rounded-[14px] px-4 bg-white font-inter font-semibold max-[426px]:text-[12px] text-[14px] outline-none cursor-pointer placeholder:opacity-100 transition-[color,opacity] duration-150 hover:placeholder:opacity-50',
 				error ? '!bg-[#ffe5e5]' : '',
 			].join(' ')}
 		/>
