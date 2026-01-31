@@ -36,6 +36,47 @@ const firstTextLine = hero => {
 	return ''
 }
 
+// --- NEW: "в Москве / в Казани" (безопасно, с исключениями) ---
+const toLocativeRu = name => {
+	if (!name) return ''
+	const n = String(name).trim()
+	const key = n.toLowerCase()
+
+	// популярные/проблемные города — вручную (добавляй по мере надобности)
+	const exceptions = {
+		москва: 'Москве',
+		'санкт-петербург': 'Санкт-Петербурге',
+		'нижний новгород': 'Нижнем Новгороде',
+		екатеринбург: 'Екатеринбурге',
+		новосибирск: 'Новосибирске',
+		краснодар: 'Краснодаре',
+		владивосток: 'Владивостоке',
+		'ростов-на-дону': 'Ростове-на-Дону',
+		казань: 'Казани',
+		сочи: 'Сочи',
+	}
+
+	if (exceptions[key]) return exceptions[key]
+
+	// если в данных вдруг придёт уже "в Казани" — не ломаем
+	if (/^\s*в\s+/i.test(n)) return n.replace(/^\s*в\s+/i, '').trim()
+
+	// мягкие правила, чтобы не наделать ошибок (лучше иногда не склонить)
+	if (n.endsWith('а')) return n.slice(0, -1) + 'е' // Тула -> Туле
+	if (n.endsWith('я')) return n.slice(0, -1) + 'е' // Уфа? (не попадает), а вот "Ижевск" не тронем
+	if (n.endsWith('ь')) return n.slice(0, -1) + 'и' // Тверь -> Твери
+
+	return n
+}
+
+const makeCityDescription = (cityName, hero) => {
+	const loc = toLocativeRu(cityName)
+	const subtitle = hero?.subtitle ? clamp(hero.subtitle, 90) : ''
+	// Формула: город + смысл страницы + аккуратное добивание из hero.subtitle
+	const base = `Служба по контракту в ${loc}: вакансии, выплаты, льготы, требования и бесплатная консультация.`
+	return subtitle ? `${base} ${subtitle}` : base
+}
+
 const DynamicPage = ({ pageType }) => {
 	const { slug } = useParams()
 	const location = useLocation()
@@ -57,9 +98,18 @@ const DynamicPage = ({ pageType }) => {
 	const baseTitle = data?.seo?.title || meta.name || hero.title || 'Страница'
 	const title = `${baseTitle}${SITE_CONFIG.brandSuffix ?? ''}`.trim()
 
-	// DESCRIPTION priority: seo.description -> hero.subtitle -> first hero text
+	// DESCRIPTION priority:
+	// 1) seo.description
+	// 2) если city — генерим "нормальную" под город
+	// 3) hero.subtitle
+	// 4) first hero text
+	const cityName = meta.name || hero.title || baseTitle
 	const baseDescription =
-		data?.seo?.description || hero.subtitle || firstTextLine(hero)
+		data?.seo?.description ||
+		(pageType === 'city' ? makeCityDescription(cityName, hero) : null) ||
+		hero.subtitle ||
+		firstTextLine(hero)
+
 	const description = clamp(baseDescription)
 
 	// canonical
